@@ -1,0 +1,6 @@
+$ORIGIN richardeverts.com.
+$TTL 300
+@ IN CNAME r0tqfq2k.up.railway.app.
+_railway-verify IN TXT "railway-verify=d60d82e32afb4e3a002f599907cdaea4c944afd5f9df05c60e505e2275c175ab"
+www IN CNAME 9w0lzyc4.up.railway.app.
+_railway-verify.www IN TXT "railway-verify=b7c0ab6f2860f611e3f0849f7487d73cced413e500459efb55f3264d6db53597"
