@@ -1,0 +1,27 @@
+/docs/
+/site/node_modules/
+/site/dist/
+/site/.next/
+/site/.vinext/
+/site/.wrangler/
+/site/.sites-runtime/
+/site/outputs/
+/site/test-results/
+*.tsbuildinfo
+.env*
+.DS_Store
+
+# Generated publishing artifacts (recreated by the build)
+/site/public/research/
+/site/public/work/
+/site/public/writing/
+/site/public/speaking/
+/site/public/*.md
+/site/public/llms.txt
+/site/public/profile.json
+/site/public/sitemap.xml
+/site/public/feed.xml
+/site/public/robots.txt
+/site/public/Richard-Everts-Resume.pdf
+/site/public/social.svg
+/site/public/social.png

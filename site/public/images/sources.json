@@ -1,0 +1,51 @@
+[
+  {
+    "file": "/images/portrait.webp",
+    "source": "https://github.com/lesreaper",
+    "downloadUrl": "https://avatars.githubusercontent.com/u/6892945?v=4&s=800",
+    "credit": "Public author profile avatar; identity established by Richard Everts / Deep SIML Labs GitHub account. Copyright retained by original owner; supplied for personal author identification.",
+    "bytes": 14424
+  },
+  {
+    "file": "/images/light-up-the-grind.webp",
+    "source": "https://books.apple.com/au/book/light-up-the-grind/id1615080107",
+    "downloadUrl": "https://is1-ssl.mzstatic.com/image/thumb/Publication116/v4/ef/c9/3e/efc93e96-e6f1-5f3d-1514-3679286c1623/9781667821245.jpg/600x0w.jpg",
+    "credit": "Light Up the Grind cover, Richard Everts / BookBaby. Promotional bibliographic identification of the site owner\u2019s own book; not an open license.",
+    "bytes": 21996
+  },
+  {
+    "file": "/images/on-terran-liberty.webp",
+    "source": "https://www.bargainbookswholesale.com/products/on-terran-liberty-volume-1",
+    "downloadUrl": "https://bargain-books.s3.amazonaws.com/uploads/book/image/53952/9781667880983.jpg",
+    "credit": "On Terran Liberty: Volume 1 cover, Richard C. Everts / BookBaby. Promotional bibliographic identification of the site owner\u2019s own book; not an open license.",
+    "bytes": 12660
+  },
+  {
+    "file": "/images/united-states-of-autism.webp",
+    "source": "https://tv.apple.com/us/movie/the-united-states-of-autism/umc.cmc.1bcmgq9wq1xw66hecb1phtu6m",
+    "downloadUrl": "https://is1-ssl.mzstatic.com/image/thumb/tXoyXtfhho1Pmxh8Y-73ZQ/1200x675.jpg",
+    "credit": "The United States of Autism promotional artwork, copyright 2013 The Tommy Foundation. Used to identify the documentary directed/produced/edited by site owner Richard Everts; not an open license.",
+    "bytes": 43522
+  },
+  {
+    "file": "/fonts/instrument-serif.woff2",
+    "source": "https://fonts.google.com/",
+    "downloadUrl": "https://fonts.gstatic.com/s/instrumentserif/v5/jizBRFtNs2ka5fXjeivQ4LroWlx-6zUTjg.woff2",
+    "credit": "Self-hosted Latin WOFF2 font, SIL Open Font License 1.1. Instrument Serif by Instrument; Manrope by Mikhail Sharanda and collaborators.",
+    "bytes": 21032
+  },
+  {
+    "file": "/fonts/instrument-serif-italic.woff2",
+    "source": "https://fonts.google.com/",
+    "downloadUrl": "https://fonts.gstatic.com/s/instrumentserif/v5/jizHRFtNs2ka5fXjeivQ4LroWlx-6zAjjH7M.woff2",
+    "credit": "Self-hosted Latin WOFF2 font, SIL Open Font License 1.1. Instrument Serif by Instrument; Manrope by Mikhail Sharanda and collaborators.",
+    "bytes": 22128
+  },
+  {
+    "file": "/fonts/manrope.woff2",
+    "source": "https://fonts.google.com/",
+    "downloadUrl": "https://fonts.gstatic.com/s/manrope/v23/xn7gYHE41ni1AdIRggexSg.woff2",
+    "credit": "Self-hosted Latin WOFF2 font, SIL Open Font License 1.1. Instrument Serif by Instrument; Manrope by Mikhail Sharanda and collaborators.",
+    "bytes": 24532
+  }
+]
