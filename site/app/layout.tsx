@@ -4,7 +4,7 @@ import Footer from "./components/Footer";
 import { person, site } from "../lib/profile";
 import "./globals.css";
 export const metadata: Metadata = {
-  metadataBase: new URL("https://richardeverts.com"),
+  metadataBase: new URL("https://richeverts.com"),
   title: {
     default: "Richard Everts — Intelligence & Human Agency",
     template: "%s | Richard Everts",

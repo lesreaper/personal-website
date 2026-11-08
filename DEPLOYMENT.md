@@ -10,14 +10,14 @@ Railway follows `main` and builds the `/site` directory. The verified deployment
 
 ## Remaining Cloudflare setup
 
-The custom domains are attached to Railway but await DNS ownership verification and certificates. Cloudflare DNS was not accessible from the implementation session. Add the following records in the `richardeverts.com` zone. Set CNAME records to **DNS only** during verification, and use the default TTL.
+The custom domains are attached to Railway but await DNS ownership verification and certificates. Cloudflare DNS was not accessible from the implementation session. Add the following records in the `richeverts.com` zone. Set CNAME records to **DNS only** during verification, and use the default TTL.
 
 | Type | Name in Cloudflare | Value |
 | --- | --- | --- |
-| CNAME | @ | `r0tqfq2k.up.railway.app` |
-| TXT | _railway-verify | `railway-verify=d60d82e32afb4e3a002f599907cdaea4c944afd5f9df05c60e505e2275c175ab` |
-| CNAME | www | `9w0lzyc4.up.railway.app` |
-| TXT | _railway-verify.www | `railway-verify=b7c0ab6f2860f611e3f0849f7487d73cced413e500459efb55f3264d6db53597` |
+| CNAME | @ | `272xgth1.up.railway.app` |
+| TXT | _railway-verify | `railway-verify=ad8aaa9efdda710637dc875e585f503a289cda4ac0532975f4f498f59ee5ae58` |
+| CNAME | www | `gv45jfgi.up.railway.app` |
+| TXT | _railway-verify.www | `railway-verify=9f1633b92b6263ae2479dc1b392f4f432f36777e41a61a2be39288cc3005037b` |
 
 Replace only conflicting website A/AAAA/CNAME records. Leave unrelated DNS records in place. After Railway verifies both domains and issues certificates, verify apex HTTPS and the permanent www-to-apex redirect with paths and query strings preserved. Railway automatically checks the ownership TXT records; if verification expires after 72 hours, correct DNS and retry the certificate in Railway.
 
@@ -33,3 +33,10 @@ Replace only conflicting website A/AAAA/CNAME records. Leave unrelated DNS recor
 - Only LinkedIn and X are published as contact channels. The original source resume is excluded from Git and deployment.
 
 Evidence files and screenshots are local under `site/outputs/` and are deliberately not committed.
+
+## Branches and environments
+
+- `main` automatically deploys to Railway `production` (`6141e669-90a4-4d0f-8c95-fcd6fd89c676`).
+- `dev` automatically deploys to Railway `development` (`adfb0caf-2368-48ca-9b5a-d21ee7334fab`).
+- Development uses `SITE_ENVIRONMENT=development` to send `X-Robots-Tag: noindex, nofollow, noarchive` and a disallow-all robots.txt. Production remains crawlable.
+- Make changes on `dev`, review the development deployment, then merge `dev` into `main` to release.

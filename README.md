@@ -1,6 +1,6 @@
 # Richard Everts — personal website
 
-Research, engineering, film, writing, and speaking at richardeverts.com.
+Research, engineering, film, writing, and speaking at richeverts.com.
 
 The application lives in `site/`. Private source documents in `docs/` are deliberately excluded from Git and deployment.
 

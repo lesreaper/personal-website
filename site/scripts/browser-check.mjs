@@ -174,7 +174,7 @@ try {
     const head = await rawRequest('/', { method: 'HEAD' }); assert.equal(head.status, 200); assert.equal(head.body.length, 0);
     for (const path of ['/does-not-exist', '/docs/Resume_April_2026.pdf', '/.env', '/.git/HEAD', '/%2e%2e%2fdocs%2fResume_April_2026.pdf']) assert.equal((await rawRequest(path)).status, 404, path);
     const post = await rawRequest('/', { method: 'POST' }); assert.equal(post.status, 405); assert.equal(post.headers.allow, 'GET, HEAD');
-    const www = await rawRequest('/research?topic=SIML', { host: 'www.richardeverts.com' }); assert.equal(www.status, 308); assert.equal(www.headers.location, 'https://richardeverts.com/research?topic=SIML');
+    const www = await rawRequest('/research?topic=SIML', { host: 'www.richeverts.com' }); assert.equal(www.status, 308); assert.equal(www.headers.location, 'https://richeverts.com/research?topic=SIML');
     const legacy = await rawRequest('/february-and-march-lancaster-ai-meetup-fun/?from=old'); assert.equal(legacy.status, 308); assert.equal(legacy.headers.location, '/speaking?from=old');
   });
   await check('no browser JavaScript errors during visitor flows', async () => assert.deepEqual(pageErrors, []));

@@ -234,7 +234,7 @@ await output(
 
 await output(
   "social.svg",
-  `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><defs><radialGradient id="g"><stop stop-color="#15373d"/><stop offset="1" stop-color="#0b1114"/></radialGradient></defs><rect width="1200" height="630" fill="url(#g)"/><g fill="none" stroke="#64d8d2" opacity=".25">${Array.from({ length: 16 }, (_, index) => `<ellipse cx="1000" cy="330" rx="${100 + index * 25}" ry="${45 + index * 15}" transform="rotate(-24 1000 330)"/>`).join("")}</g><text x="85" y="132" font-family="monospace" font-size="19" letter-spacing="4" fill="#8ee4df">RESEARCH · ENGINEERING · HUMAN EXPERIENCE</text><text x="80" y="295" font-family="Georgia,serif" font-size="90" fill="#f4f1e9">Richard Everts</text><text x="85" y="370" font-family="Arial,sans-serif" font-size="32" fill="#c9d0d0">Intelligence and human agency.</text><text x="85" y="548" font-family="monospace" font-size="22" fill="#8ee4df">richardeverts.com</text></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><defs><radialGradient id="g"><stop stop-color="#15373d"/><stop offset="1" stop-color="#0b1114"/></radialGradient></defs><rect width="1200" height="630" fill="url(#g)"/><g fill="none" stroke="#64d8d2" opacity=".25">${Array.from({ length: 16 }, (_, index) => `<ellipse cx="1000" cy="330" rx="${100 + index * 25}" ry="${45 + index * 15}" transform="rotate(-24 1000 330)"/>`).join("")}</g><text x="85" y="132" font-family="monospace" font-size="19" letter-spacing="4" fill="#8ee4df">RESEARCH · ENGINEERING · HUMAN EXPERIENCE</text><text x="80" y="295" font-family="Georgia,serif" font-size="90" fill="#f4f1e9">Richard Everts</text><text x="85" y="370" font-family="Arial,sans-serif" font-size="32" fill="#c9d0d0">Intelligence and human agency.</text><text x="85" y="548" font-family="monospace" font-size="22" fill="#8ee4df">richeverts.com</text></svg>`,
 );
 
 await output(
@@ -250,8 +250,8 @@ const pdf = await PDFDocument.create();
 pdf.setTitle("Richard Everts — Public Resume");
 pdf.setAuthor("Richard Everts");
 pdf.setSubject("AI research and software engineering experience");
-pdf.setCreator("richardeverts.com");
-pdf.setProducer("richardeverts.com");
+pdf.setCreator("richeverts.com");
+pdf.setProducer("richeverts.com");
 const regular = await pdf.embedFont(StandardFonts.Helvetica);
 const bold = await pdf.embedFont(StandardFonts.HelveticaBold);
 const color = rgb(0.08, 0.12, 0.14);
@@ -334,7 +334,7 @@ resume.recognition.forEach((text) => {
 });
 const pdfPages = pdf.getPages();
 pdfPages.forEach((sheet, index) => {
-  sheet.drawText("Richard Everts | richardeverts.com", {
+  sheet.drawText("Richard Everts | richeverts.com", {
     x: 48,
     y: 27,
     size: 8,
