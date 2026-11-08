@@ -6,7 +6,7 @@ Live site: https://richard-everts-production.up.railway.app
 
 Railway dashboard: https://railway.com/project/3dc7d116-aece-43fd-804f-aa135d6eae08/service/4f060a2b-f005-4362-9ac8-7439bc1ec938?environmentId=6141e669-90a4-4d0f-8c95-fcd6fd89c676
 
-Railway follows `main` and builds the `/site` directory. The verified deployment is `0586d223-1924-4e63-a5d5-beb02195ce68` (SUCCESS). `npm run build` renders and verifies all 35 pages, 28 source-backed entries, machine-readable files, and the public resume. Build dependencies include `RAILPACK_BUILD_APT_PACKAGES=poppler-utils`; `PORT=8080` matches the public domains.
+Railway follows `main` and builds the `/site` directory. The initial verified deployment was `0586d223-1924-4e63-a5d5-beb02195ce68`; consult Railway for the latest deployment of each branch. `npm run build` renders and verifies all 35 pages, 28 source-backed entries, machine-readable files, and the public resume. Build dependencies include `RAILPACK_BUILD_APT_PACKAGES=poppler-utils`; `PORT=8080` matches the public domains.
 
 ## Remaining Cloudflare setup
 
@@ -40,3 +40,7 @@ Evidence files and screenshots are local under `site/outputs/` and are deliberat
 - `dev` automatically deploys to Railway `development` (`adfb0caf-2368-48ca-9b5a-d21ee7334fab`).
 - Development uses `SITE_ENVIRONMENT=development` to send `X-Robots-Tag: noindex, nofollow, noarchive` and a disallow-all robots.txt. Production remains crawlable.
 - Make changes on `dev`, review the development deployment, then merge `dev` into `main` to release.
+
+Development preview: https://richard-everts-development.up.railway.app
+
+After a build, run `node --test site/scripts/serve.test.mjs` from the repository root to verify environment indexing and canonical redirects.

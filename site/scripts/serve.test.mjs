@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { once } from 'node:events';
 import { test } from 'node:test';
+import http from 'node:http';
 import { createStaticServer } from './serve.mjs';
 
 test('development is excluded from indexing; production remains crawlable', async () => {
@@ -23,9 +24,14 @@ test('development is excluded from indexing; production remains crawlable', asyn
     delete process.env.SITE_ENVIRONMENT;
     assert.equal((await fetch(origin)).headers.get('x-robots-tag'), null);
     assert.doesNotMatch(await (await fetch(origin + '/robots.txt')).text(), /Disallow: \/\s*$/m);
-    const redirect = await fetch(origin + '/research?q=SIML', { headers: { Host: 'www.richeverts.com' }, redirect: 'manual' });
+    const redirect = await new Promise((resolve, reject) => {
+      http.get(origin + '/research?q=SIML', { headers: { Host: 'www.richeverts.com' } }, response => {
+        response.resume();
+        resolve({ status: response.statusCode, location: response.headers.location });
+      }).on('error', reject);
+    });
     assert.equal(redirect.status, 308);
-    assert.equal(redirect.headers.get('location'), 'https://richeverts.com/research?q=SIML');
+    assert.equal(redirect.location, 'https://richeverts.com/research?q=SIML');
   } finally {
     if (previous === undefined) delete process.env.SITE_ENVIRONMENT;
     else process.env.SITE_ENVIRONMENT = previous;
