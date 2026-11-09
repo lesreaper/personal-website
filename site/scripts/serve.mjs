@@ -52,7 +52,8 @@ const legacy = {
 export function createStaticServer() {
   return http.createServer((request, response) => {
     const development = process.env.SITE_ENVIRONMENT === "development";
-    if (development) response.setHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
+    if (development)
+      response.setHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
     const authority = request.headers.host ?? "localhost";
     if (authority.split(":")[0].toLowerCase() === "www.richeverts.com") {
       response.writeHead(308, {
@@ -81,9 +82,25 @@ export function createStaticServer() {
       response.end();
       return;
     }
+    if (/^\/(?:resume(?:[/.]|$)|Richard-Everts-Resume\.pdf$)/i.test(pathname)) {
+      response.writeHead(410, {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Cache-Control": "no-store",
+        "X-Robots-Tag": "noindex, noarchive",
+      });
+      response.end(
+        request.method === "HEAD"
+          ? undefined
+          : "This resource is no longer available.",
+      );
+      return;
+    }
     if (development && pathname === "/robots.txt") {
       const body = "User-agent: *\nDisallow: /\n";
-      response.writeHead(200, { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" });
+      response.writeHead(200, {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Cache-Control": "no-store",
+      });
       response.end(request.method === "HEAD" ? undefined : body);
       return;
     }

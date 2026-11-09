@@ -4,7 +4,7 @@ Implemented from the owner-approved design brief and image in `../docs/`. The re
 
 Use charcoal `#171916`, ivory `#F4EBDC`, amber `#D7A35D`, and muted teal `#6F9991`. Playfair Display regular and italic provide the editorial voice; Source Sans 3 provides readable supporting text. Licensed font subsets and OFL notices are under `public/fonts/`.
 
-The homepage uses a four-link nameplate header, live two-line hero, static organic sculpture, ivory five-column work section, personal portrait, and selected research. The work row becomes two columns and then one. Existing archives, project pages, sources, and public resume remain available.
+The homepage uses a four-link nameplate header, live two-line hero, static organic sculpture, ivory five-column work section, personal portrait, and selected research. The work row becomes two columns and then one. Existing archives, project pages, and sources remain available. The public resume and all of its download formats have been withdrawn at the owner’s request; do not reintroduce them.
 
 ## Generated artwork
 

@@ -11,93 +11,6 @@
     "short": "Richard Everts is an AI researcher, software engineer, filmmaker, and author exploring intelligence and human agency. He leads Deep SIML Labs and previously led technical development at Bestie Bot. His work spans simulation, applied AI, The United States of Autism, and the books On Terran Liberty and Light Up the Grind.",
     "extended": "Richard Everts works across research, production engineering, and public storytelling. He has built software professionally since 2010, with experience in Python, full-stack applications, computer vision, retrieval systems, and agent orchestration. At Deep SIML Labs, his work investigates simulation, cognitive systems, and the relationship between models and the physical world. He also publishes as The Operator. At Bestie Bot, he combined engineering leadership with research into assistive technology and multimodal sensing, including a PennAITech-supported home-monitoring pilot. Beyond engineering, he directed, produced, and edited The United States of Autism, a documentary following families across America. His books explore personal fulfillment and political possibility. A philosophy graduate of Franklin & Marshall College, he brings questions about minds, agency, and lived experience into both technical and creative work."
   },
-  "resume": {
-    "title": "AI Researcher & Senior Software Engineer",
-    "summary": "Senior Python, AI, and full-stack engineer building production software since 2010. Experience spans backend architecture, applied AI, retrieval-augmented generation, multimodal sensing, simulation, and technical team leadership.",
-    "strengths": [
-      {
-        "label": "Backend & architecture",
-        "items": [
-          "Python, FastAPI, Flask, Django, Node.js",
-          "REST and GraphQL APIs, microservices, event-driven systems",
-          "Docker, Redis, SQS/SNS, RabbitMQ"
-        ]
-      },
-      {
-        "label": "Applied AI",
-        "items": [
-          "LLM integrations, retrieval-augmented generation, GraphRAG",
-          "LangChain, LlamaIndex, embeddings, vector databases",
-          "Multi-agent orchestration, evaluation harnesses, computer vision"
-        ]
-      },
-      {
-        "label": "Product & cloud",
-        "items": [
-          "React, Next.js, React Native, TypeScript",
-          "AWS Lambda, ECS/Fargate, S3, CI/CD",
-          "Rust, WGPU, PyTorch, TensorFlow, ONNX"
-        ]
-      }
-    ],
-    "experience": [
-      {
-        "role": "Lead AI Researcher",
-        "organization": "Deep SIML Labs",
-        "period": "2025–present",
-        "bullets": [
-          "Develop AI pipelines in Rust and Python, with a focus on simulation and cognitive systems.",
-          "Built a 3D simulation stack with custom compression and retrieval.",
-          "Publish research and technical artifacts connecting the Free Energy Principle with system architecture."
-        ]
-      },
-      {
-        "role": "CTO, Principal Full-Stack AI Engineer & Engineering Manager",
-        "organization": "Bestie Bot",
-        "period": "2020–2024",
-        "bullets": [
-          "Led development of AI telehealth systems combining language models, computer vision, and digital twinning.",
-          "Principal investigator on a PennAITech pilot for RGB-D and thermal home monitoring, supported through the NIA-funded a2 Collective.",
-          "Delivered React, React Native, and Next.js applications alongside Python microservices and NVIDIA edge systems.",
-          "Built multimodal retrieval and production evaluation, release, and monitoring pipelines; managed a distributed engineering team."
-        ]
-      },
-      {
-        "role": "Contract Full-Stack Engineer & AI Build Lead",
-        "organization": "Independent engineering",
-        "period": "2010–present",
-        "bullets": [
-          "Designed enterprise AI architecture, high-volume ingestion, and distributed data workflows.",
-          "Integrated observability and evaluation with LangSmith, Sentry, and Promptfoo.",
-          "Delivered React and Next.js applications for clients including HP, Intel, ZenBusiness, PledgeIt, and Quub.",
-          "Built document and video processing workflows with AWS Lambda, S3, and asynchronous orchestration."
-        ]
-      },
-      {
-        "role": "Director, Producer & Editor",
-        "organization": "The United States of Autism",
-        "period": "2013 release",
-        "bullets": [
-          "Created a feature documentary exploring autism through the experiences of families across America.",
-          "The production followed an 11,000-mile journey over 40 days, with interviews filmed in five languages."
-        ]
-      }
-    ],
-    "education": [
-      {
-        "degree": "Bachelor of Arts in Philosophy",
-        "institution": "Franklin & Marshall College",
-        "detail": "Scientific and Philosophical Studies of the Mind, including AI and neuroscience."
-      }
-    ],
-    "recognition": [
-      "Inventor, US11388238B2: Localized situational intelligent awareness from multiple sensor types through a 4-dimensional state system; granted July 12, 2022.",
-      "Runner-up, Federalist Society Future of AI in Law Symposium for National Security (2024), for the AI Rollback (AIR) Strategy Framework.",
-      "AWS Machine Learning Foundations, Udacity (2022).",
-      "Robotics Software Engineer, Udacity (2019).",
-      "Build a Modern Computer from First Principles, Coursera (2017)."
-    ]
-  },
   "timeline": [
     {
       "year": "2010",
@@ -148,5 +61,21 @@
       "title": "Technology and human agency",
       "description": "A perspective spanning assistive technology, documentary storytelling, philosophy, and the people affected by what we build."
     }
-  ]
+  ],
+  "credentials": {
+    "education": [
+      {
+        "degree": "Bachelor of Arts in Philosophy",
+        "institution": "Franklin & Marshall College",
+        "detail": "Scientific and Philosophical Studies of the Mind, including AI and neuroscience."
+      }
+    ],
+    "recognition": [
+      "Inventor, US11388238B2: Localized situational intelligent awareness from multiple sensor types through a 4-dimensional state system; granted July 12, 2022.",
+      "Runner-up, Federalist Society Future of AI in Law Symposium for National Security (2024), for the AI Rollback (AIR) Strategy Framework.",
+      "AWS Machine Learning Foundations, Udacity (2022).",
+      "Robotics Software Engineer, Udacity (2019).",
+      "Build a Modern Computer from First Principles, Coursera (2017)."
+    ]
+  }
 }

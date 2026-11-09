@@ -1,6 +1,6 @@
 import profile from "../content/profile.json";
 
-export const { site, bios, resume, timeline, speakingTopics } = profile;
+export const { site, bios, credentials, timeline, speakingTopics } = profile;
 
 export const person = {
   "@context": "https://schema.org",

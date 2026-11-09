@@ -7,9 +7,7 @@ import {
   statSync,
 } from "node:fs";
 import path from "node:path";
-import { spawnSync } from "node:child_process";
 import { getEntries, toHref } from "../lib/content.ts";
-import { PDFDocument } from "pdf-lib";
 import sharp from "sharp";
 import { resolveFile } from "./serve.mjs";
 
@@ -76,7 +74,6 @@ const routes = [
   "/writing",
   "/speaking",
   "/about",
-  "/resume",
   ...entries.map(toHref),
 ];
 function resolveRoute(route) {
@@ -292,11 +289,9 @@ for (const required of [
   "writing.md",
   "speaking.md",
   "about.md",
-  "resume.md",
   "sitemap.xml",
   "feed.xml",
   "robots.txt",
-  "Richard-Everts-Resume.pdf",
   "social.svg",
   "social.png",
 ])
@@ -328,50 +323,33 @@ if (existsSync(profileFile)) {
     "Operator identity attribution missing",
   );
 }
-const pdfPath = path.join(root, "Richard-Everts-Resume.pdf");
-if (existsSync(pdfPath)) {
-  const pdf = await PDFDocument.load(readFileSync(pdfPath));
-  const metadata = [
-    pdf.getTitle(),
-    pdf.getAuthor(),
-    pdf.getSubject(),
-    pdf.getCreator(),
-    pdf.getProducer(),
-    pdf.getKeywords(),
-  ]
-    .filter(Boolean)
-    .join("\n");
-  privacy(metadata, "public resume PDF metadata", true);
+for (const retired of [
+  "/resume",
+  "/resume.html",
+  "/resume/index.html",
+  "/resume.md",
+  "/Richard-Everts-Resume.pdf",
+]) {
   check(
-    pdf.getPageCount() > 0 && pdf.getPageCount() < 5,
-    "Resume PDF must contain a compact professional resume",
+    !resolveRoute(retired),
+    `Withdrawn resume artifact is still published: ${retired}`,
   );
+}
+check(
+  !("resume" in profile),
+  "A structured resume must not be retained in the public profile source",
+);
+for (const file of files.filter((file) =>
+  [".html", ".md", ".json", ".xml", ".txt", ".rsc"].includes(
+    path.extname(file),
+  ),
+)) {
   check(
-    pdf.getAuthor() === "Richard Everts",
-    "Public resume PDF author is incorrect",
+    !/\/resume(?:[/.?#"']|$)|Richard-Everts-Resume\.pdf/i.test(
+      readFileSync(file, "utf8"),
+    ),
+    `Withdrawn resume reference in ${path.relative(root, file)}`,
   );
-  privacy(JSON.stringify(profile.resume), "public resume source", true);
-  if (!process.argv.includes("--skip-system-pdf-tools")) {
-    const result = spawnSync("pdftotext", [pdfPath, "-"], { encoding: "utf8" });
-    if (result.error?.code === "ENOENT") {
-      issues.push(
-        "pdftotext is required for local release verification; install Poppler before release.",
-      );
-    } else {
-      check(result.status === 0, "Resume PDF text extraction failed");
-      privacy(result.stdout, "public resume PDF", true);
-      check(
-        result.stdout.includes("Richard Everts") &&
-          result.stdout.includes("Bestie Bot") &&
-          result.stdout.includes("Deep SIML Labs"),
-        "Resume PDF is missing expected professional history",
-      );
-      const info = spawnSync("pdfinfo", [pdfPath], { encoding: "utf8" });
-      check(info.status === 0, "Public resume PDF metadata extraction failed");
-      if (info.status === 0)
-        privacy(info.stdout, "public resume PDF system metadata", true);
-    }
-  }
 }
 
 if (issues.length) {
@@ -381,5 +359,5 @@ if (issues.length) {
   process.exit(1);
 }
 console.log(
-  `Verified ${routes.length} pages, ${entries.length} sourced entries, internal links, JSON-LD, publishing artifacts, and resume privacy.`,
+  `Verified ${routes.length} pages, ${entries.length} sourced entries, internal links, JSON-LD, publishing artifacts, and resume withdrawal.`,
 );

@@ -290,38 +290,37 @@ try {
     );
     assert.ok(await frame.getAttribute("title"));
   });
-  await check(
-    "public resume is downloadable as a PDF and contact links stay social-only",
-    async () => {
-      await visit("/resume");
-      const hrefs = await page
-        .locator("a[href]")
-        .evaluateAll((links) => links.map((link) => link.getAttribute("href")));
+  await check("resume page and every download are withdrawn", async () => {
+    for (const path of [
+      "/resume",
+      "/resume/",
+      "/resume.html",
+      "/resume.md",
+      "/Richard-Everts-Resume.pdf",
+    ]) {
+      const response = await context.request.get(base + path);
+      assert.equal(response.status(), 410, path);
+      assert.match(response.headers()["cache-control"], /no-store/);
+    }
+    await visit("/about");
+    assert.equal(await page.locator('a[href*="resume" i]').count(), 0);
+    for (const path of [
+      "/llms.txt",
+      "/sitemap.xml",
+      "/profile.json",
+      "/index.md",
+      "/about.md",
+    ]) {
+      const response = await context.request.get(base + path);
+      assert.equal(response.status(), 200);
       assert.ok(
-        hrefs.some((href) => href?.endsWith("Richard-Everts-Resume.pdf")),
+        !/\/resume(?:[/.]|$)|Richard-Everts-Resume\.pdf/i.test(
+          await response.text(),
+        ),
+        path,
       );
-      assert.ok(!hrefs.some((href) => /^(mailto|tel):/i.test(href)));
-      const text = await page.locator("body").innerText();
-      assert.ok(!/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/i.test(text));
-      const pdf = await context.request.get(
-        base + "/Richard-Everts-Resume.pdf",
-      );
-      assert.equal(pdf.status(), 200);
-      assert.match(pdf.headers()["content-type"], /application\/pdf/);
-      assert.equal((await pdf.body()).subarray(0, 4).toString(), "%PDF");
-      await visit("/about");
-      for (const href of [
-        "https://www.linkedin.com/in/richeverts",
-        "https://x.com/rich_everts",
-      ])
-        assert.ok((await page.locator(`a[href="${href}"]`).count()) > 0);
-      await page.screenshot({
-        path: "outputs/about-desktop.png",
-        fullPage: true,
-        animations: "disabled",
-      });
-    },
-  );
+    }
+  });
   await check(
     "desktop representative pages pass serious accessibility checks",
     async () => {
@@ -330,7 +329,6 @@ try {
         ["/about", "about-desktop"],
         ["/research", "research-desktop"],
         ["/speaking", "speaking-desktop"],
-        ["/resume", "resume-desktop"],
         ["/work/the-united-states-of-autism", "film-desktop"],
         ["/writing/on-terran-liberty", "book-desktop"],
       ]) {

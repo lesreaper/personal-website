@@ -26,8 +26,8 @@ export default function Footer() {
           <a href={site.x} target="_blank" rel="noopener noreferrer">
             Follow the conversation on X <Arrow diagonal />
           </a>
-          <a href="/resume">
-            Experience & resume <Arrow />
+          <a href="/about">
+            About Richard <Arrow />
           </a>
         </div>
       </div>

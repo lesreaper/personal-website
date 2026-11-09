@@ -1,15 +1,23 @@
 import { mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import sharp from "sharp";
 import { getEntries, getMarkdown, toHref } from "../lib/content.ts";
 
 const profile = JSON.parse(
   await readFile(new URL("../content/profile.json", import.meta.url), "utf8"),
 );
-const { site, bios, resume, timeline, speakingTopics } = profile;
+const { site, bios, timeline, speakingTopics } = profile;
 const publicRoot = path.join(process.cwd(), "public");
 const entries = getEntries();
+for (const retired of [
+  "resume.md",
+  "resume.html",
+  "resume",
+  "Richard-Everts-Resume.pdf",
+]) {
+  await rm(path.join(publicRoot, retired), { force: true, recursive: true });
+}
+
 // Markdown alternatives in these folders are generated. Remove stale files
 // when a source record is renamed or withdrawn.
 for (const category of ["research", "work", "writing", "speaking"]) {
@@ -82,7 +90,7 @@ await output(
       ([category, description]) =>
         `- [${category[0].toUpperCase()}${category.slice(1)}](${site.url}/${category}.md): ${description}`,
     ),
-    `\n[Biography](${site.url}/about.md) · [Resume](${site.url}/resume.md)`,
+    `\n[Biography](${site.url}/about.md)`,
     "\n## Selected work",
     ...entries
       .filter((entry) => entry.featured)
@@ -107,29 +115,7 @@ const aboutMarkdown = [
   ...speakingTopics.map((item) => `\n### ${item.title}\n${item.description}`),
   `\n[LinkedIn](${site.linkedin}) · [X](${site.x})\n`,
 ].join("\n");
-const resumeMarkdown = [
-  `# ${site.name}\n\n${resume.title}\n\n${resume.summary}`,
-  `\n[Website](${site.url}) · [LinkedIn](${site.linkedin}) · [X](${site.x}) · [GitHub](${site.github})`,
-  "\n## Experience",
-  ...resume.experience.map(
-    (item) =>
-      `\n### ${item.role}\n${item.organization} · ${item.period}\n\n${item.bullets.map((bullet) => `- ${bullet}`).join("\n")}`,
-  ),
-  "\n## Technical strengths",
-  ...resume.strengths.map(
-    (item) =>
-      `\n### ${item.label}\n${item.items.map((text) => `- ${text}`).join("\n")}`,
-  ),
-  "\n## Education",
-  ...resume.education.map(
-    (item) => `\n### ${item.degree}\n${item.institution}\n\n${item.detail}`,
-  ),
-  "\n## Recognition and certifications",
-  ...resume.recognition.map((text) => `- ${text}`),
-  "",
-].join("\n");
 await output("about.md", aboutMarkdown);
-await output("resume.md", resumeMarkdown);
 await output(
   "profile.json",
   JSON.stringify(
@@ -190,7 +176,6 @@ await output(
     ),
     "\n## Profile",
     `- [Biography](${site.url}/about.md): Background and selected career timeline.`,
-    `- [Resume](${site.url}/resume.md): Engineering experience, education, and recognition.`,
     `- [Structured profile](${site.url}/profile.json): Identity and the public work index.`,
     "\n## Collected work",
     ...entries.map(
@@ -206,15 +191,7 @@ await output(
   ].join("\n"),
 );
 
-const topLevel = [
-  "",
-  "/research",
-  "/work",
-  "/writing",
-  "/speaking",
-  "/about",
-  "/resume",
-];
+const topLevel = ["", "/research", "/work", "/writing", "/speaking", "/about"];
 const pageUrls = [
   ...topLevel.map((route) => site.url + route),
   ...entries.map((entry) => site.url + toHref(entry)),
@@ -249,112 +226,6 @@ await output(
     .toBuffer(),
 );
 
-// Rebuild a public PDF from approved data. The private source PDF is never read
-// or copied here, so invisible redaction remnants cannot enter the download.
-const pdf = await PDFDocument.create();
-pdf.setTitle("Richard Everts — Public Resume");
-pdf.setAuthor("Richard Everts");
-pdf.setSubject("AI research and software engineering experience");
-pdf.setCreator("richeverts.com");
-pdf.setProducer("richeverts.com");
-const regular = await pdf.embedFont(StandardFonts.Helvetica);
-const bold = await pdf.embedFont(StandardFonts.HelveticaBold);
-const color = rgb(0.08, 0.12, 0.14);
-let page;
-let y;
-function newPage() {
-  page = pdf.addPage([612, 792]);
-  y = 744;
-}
-function latin(text) {
-  return text
-    .replace(/[–—]/g, "-")
-    .replace(/[’‘]/g, "'")
-    .replace(/[“”]/g, '"')
-    .replace(/[^\x20-\x7e\n]/g, " ");
-}
-function line(text, options = {}) {
-  const font = options.bold ? bold : regular;
-  const size = options.size ?? 10;
-  const height = options.height ?? size * 1.4;
-  const words = latin(text).split(/\s+/);
-  let current = "";
-  const draw = (value) => {
-    if (y < 54 + height) newPage();
-    page.drawText(value, { x: 48, y, size, font, color, maxWidth: 516 });
-    y -= height;
-  };
-  for (const word of words) {
-    const candidate = current ? `${current} ${word}` : word;
-    if (font.widthOfTextAtSize(candidate, size) > 516 && current) {
-      draw(current);
-      current = word;
-    } else current = candidate;
-  }
-  if (current) draw(current);
-}
-function gap(amount = 8) {
-  y -= amount;
-}
-function heading(text) {
-  if (y < 110) newPage();
-  gap(10);
-  line(text.toUpperCase(), { bold: true, size: 11 });
-  gap(4);
-}
-newPage();
-line(site.name, { bold: true, size: 25, height: 32 });
-line(resume.title, { size: 12, height: 19 });
-line(site.url, { size: 9 });
-line(site.linkedin, { size: 9 });
-line(site.x, { size: 9 });
-line(site.github, { size: 9 });
-gap();
-line(resume.summary);
-heading("Experience");
-for (const item of resume.experience) {
-  if (y < 120) newPage();
-  line(item.organization, { bold: true, size: 11 });
-  line(`${item.role} | ${item.period}`, { size: 9 });
-  gap(4);
-  item.bullets.forEach((text) => line(`- ${text}`, { size: 9.5 }));
-  gap();
-}
-heading("Technical strengths");
-for (const item of resume.strengths) {
-  line(item.label, { bold: true, size: 10 });
-  item.items.forEach((text) => line(text, { size: 9.5 }));
-  gap();
-}
-heading("Education");
-for (const item of resume.education) {
-  line(item.degree, { bold: true });
-  line(item.institution);
-  line(item.detail, { size: 9.5 });
-}
-heading("Recognition and certifications");
-resume.recognition.forEach((text) => {
-  line(`- ${text}`, { size: 9.5 });
-  gap(3);
-});
-const pdfPages = pdf.getPages();
-pdfPages.forEach((sheet, index) => {
-  sheet.drawText("Richard Everts | richeverts.com", {
-    x: 48,
-    y: 27,
-    size: 8,
-    font: regular,
-    color: rgb(0.4, 0.45, 0.46),
-  });
-  sheet.drawText(`${index + 1} / ${pdfPages.length}`, {
-    x: 537,
-    y: 27,
-    size: 8,
-    font: regular,
-    color: rgb(0.4, 0.45, 0.46),
-  });
-});
-await output("Richard-Everts-Resume.pdf", await pdf.save());
 console.log(
-  `Generated ${entries.length} Markdown records, profile, feeds, sitemap, social card, and public resume.`,
+  `Generated ${entries.length} Markdown records, public biography, feeds, sitemap, and social card; resume exports are withdrawn.`,
 );

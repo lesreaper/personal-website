@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { bios, timeline, resume, person, site } from "../../lib/profile";
+import { bios, timeline, credentials, person, site } from "../../lib/profile";
 import Arrow from "../components/Arrow";
 export const metadata: Metadata = {
   title: "About",
@@ -24,8 +24,8 @@ export default function About() {
             Researcher. Engineer. Filmmaker. Author.
             <br />A few ways of asking what comes next.
           </p>
-          <a className="text-link" href="/resume">
-            Experience & resume <Arrow diagonal />
+          <a className="text-link" href="/work">
+            Explore my work <Arrow diagonal />
           </a>
         </div>
         <figure className="portrait">
@@ -71,8 +71,8 @@ export default function About() {
               A continuing <em>exploration.</em>
             </h2>
           </div>
-          <a className="text-link" href="/resume">
-            Full professional experience <Arrow diagonal />
+          <a className="text-link" href="/work">
+            Selected projects <Arrow diagonal />
           </a>
         </div>
         <div className="timeline">
@@ -97,7 +97,7 @@ export default function About() {
           </h2>
         </div>
         <div>
-          {resume.education.map((item) => (
+          {credentials.education.map((item) => (
             <article key={item.institution}>
               <h3>{item.degree}</h3>
               <p>{item.institution}</p>
@@ -107,13 +107,13 @@ export default function About() {
           <article>
             <h3>Research, invention & recognition</h3>
             <ul>
-              {resume.recognition.map((item) => (
+              {credentials.recognition.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
           </article>
-          <a className="text-link" href="/resume">
-            Explore the experience <Arrow diagonal />
+          <a className="text-link" href="/work">
+            Explore the work <Arrow diagonal />
           </a>
         </div>
       </section>
