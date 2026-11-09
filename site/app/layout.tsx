@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     images: ["/social.png"],
   },
   icons: { icon: "/favicon.svg" },
-  other: { "theme-color": "#101616" },
+  other: { "theme-color": "#171916" },
 };
 export default function RootLayout({
   children,
@@ -41,14 +41,14 @@ export default function RootLayout({
       <head>
         <link
           rel="preload"
-          href="/fonts/instrument-serif.woff2"
+          href="/fonts/playfair.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
-          href="/fonts/manrope.woff2"
+          href="/fonts/source-sans.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"

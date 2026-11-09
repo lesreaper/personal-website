@@ -3,20 +3,20 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Arrow from "./Arrow";
 const links = [
-  ["Research", "/research"],
   ["Work", "/work"],
-  ["Writing", "/writing"],
-  ["Speaking", "/speaking"],
+  ["Ideas", "/research"],
   ["About", "/about"],
+  ["Speaking", "/speaking"],
 ];
 export default function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   return (
     <header className="header">
-      <a className="wordmark" href="/" aria-label="re. — Richard Everts home">
-        re<span className="wordmark-dot">.</span>
+      <a className="wordmark" href="/" aria-label="Richard Everts home">
+        RICHARD EVERTS
       </a>
+      <span className="header-rule" aria-hidden="true" />
       <button
         className="menu-toggle"
         type="button"
@@ -42,13 +42,6 @@ export default function Header() {
             {label}
           </a>
         ))}
-        <a
-          href="/about#connect"
-          className="nav-connect"
-          onClick={() => setOpen(false)}
-        >
-          Let’s connect <Arrow diagonal />
-        </a>
       </nav>
     </header>
   );

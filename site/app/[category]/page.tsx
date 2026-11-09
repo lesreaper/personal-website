@@ -94,7 +94,7 @@ export default async function CategoryPage({
   const entries = getEntries(key);
   return (
     <>
-      <section className="page-intro">
+      <section className={`page-intro intro-${key}`}>
         <p className="eyebrow">
           <span className="status-dot" />
           {data.eyebrow}

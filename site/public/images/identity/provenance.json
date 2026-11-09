@@ -1,0 +1,18 @@
+{
+  "description": "Conceptual artwork generated from the owner-approved Living Intelligence design reference; decorative artwork, not research imagery or documentary stills.",
+  "tool": "Built-in image generation",
+  "palette": [
+    "#171916",
+    "#F4EBDC",
+    "#D7A35D",
+    "#6F9991"
+  ],
+  "assets": [
+    "living-intelligence-hero.webp",
+    "work-siml.webp",
+    "work-bestie.webp",
+    "work-books.webp",
+    "work-film.webp",
+    "work-talks.webp"
+  ]
+}

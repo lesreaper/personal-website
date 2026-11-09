@@ -232,9 +232,14 @@ await output(
   `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Richard Everts — Collected Work</title><link>${site.url}</link><description>${escapeXml(site.description)}</description><language>en-us</language><atom:link href="${site.url}/feed.xml" rel="self" type="application/rss+xml"/>${entries.map((entry) => `<item><title>${escapeXml(entry.title)}</title><link>${site.url}${toHref(entry)}</link><guid isPermaLink="true">${site.url}${toHref(entry)}</guid><description>${escapeXml(entry.summary)}</description><category>${escapeXml(entry.category)}</category>${/^\d{4}-\d{2}-\d{2}$/.test(entry.date) ? `<pubDate>${new Date(`${entry.date}T12:00:00Z`).toUTCString()}</pubDate>` : ""}</item>`).join("")}</channel></rss>\n`,
 );
 
+const identityArt = (
+  await readFile(
+    path.join(publicRoot, "images/identity/living-intelligence-hero.webp"),
+  )
+).toString("base64");
 await output(
   "social.svg",
-  `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><defs><radialGradient id="g"><stop stop-color="#15373d"/><stop offset="1" stop-color="#0b1114"/></radialGradient></defs><rect width="1200" height="630" fill="url(#g)"/><g fill="none" stroke="#64d8d2" opacity=".25">${Array.from({ length: 16 }, (_, index) => `<ellipse cx="1000" cy="330" rx="${100 + index * 25}" ry="${45 + index * 15}" transform="rotate(-24 1000 330)"/>`).join("")}</g><text x="85" y="132" font-family="monospace" font-size="19" letter-spacing="4" fill="#8ee4df">RESEARCH · ENGINEERING · HUMAN EXPERIENCE</text><text x="80" y="295" font-family="Georgia,serif" font-size="90" fill="#f4f1e9">Richard Everts</text><text x="85" y="370" font-family="Arial,sans-serif" font-size="32" fill="#c9d0d0">Intelligence and human agency.</text><text x="85" y="548" font-family="monospace" font-size="22" fill="#8ee4df">richeverts.com</text></svg>`,
+  `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><defs><linearGradient id="shade"><stop stop-color="#171916"/><stop offset=".52" stop-color="#171916" stop-opacity=".85"/><stop offset="1" stop-color="#171916" stop-opacity="0"/></linearGradient></defs><rect width="1200" height="630" fill="#171916"/><image href="data:image/webp;base64,${identityArt}" x="340" y="0" width="860" height="630" preserveAspectRatio="xMidYMid slice"/><rect width="1000" height="630" fill="url(#shade)"/><text x="64" y="90" font-family="Georgia,serif" font-size="26" letter-spacing="3" fill="#F4EBDC">RICHARD EVERTS</text><text x="62" y="265" font-family="Georgia,serif" font-size="66" fill="#F4EBDC">Exploring minds.</text><text x="62" y="350" font-family="Georgia,serif" font-style="italic" font-size="66" fill="#D7A35D">Building futures.</text><text x="65" y="420" font-family="Arial,sans-serif" font-size="23" fill="#F4EBDC">AI researcher. Founder. Author. Filmmaker.</text><path d="M64 490 H540" stroke="#6F9991"/><text x="65" y="545" font-family="Arial,sans-serif" font-size="22" fill="#D7A35D">richeverts.com</text></svg>`,
 );
 
 await output(
