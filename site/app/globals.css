@@ -3751,3 +3751,111 @@ body {
     font-size: clamp(50px, 16vw, 74px);
   }
 }
+
+.builder-section {
+  border-bottom: 1px solid var(--line);
+}
+.builder-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+}
+.builder-grid article {
+  padding: 30px 28px;
+  border-right: 1px solid var(--line);
+}
+.builder-grid article:first-child {
+  padding-left: 0;
+}
+.builder-grid article:last-child {
+  padding-right: 0;
+  border: 0;
+}
+.builder-grid h3 {
+  font-family: var(--serif);
+  font-size: 32px;
+  margin: 17px 0 12px;
+}
+.builder-grid h3 a:hover {
+  color: var(--accent);
+}
+.builder-grid p:not(.eyebrow) {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.builder-grid p.builder-role {
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+.outbound-links {
+  display: flex;
+  gap: 12px 25px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.outbound-links .text-link {
+  font-size: 12px;
+}
+.elsewhere-section {
+  border-top: 1px solid var(--line);
+}
+.elsewhere-section h2 {
+  margin: 25px 0 35px;
+}
+.elsewhere-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 50px;
+}
+.elsewhere-links > a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 19px;
+}
+.elsewhere-links small {
+  display: block;
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 7px;
+}
+.elsewhere-links > a:hover {
+  color: var(--accent);
+}
+.work-external-link {
+  margin-left: 25px;
+}
+.detail-external-link {
+  margin-bottom: 28px;
+}
+@media (max-width: 800px) {
+  .builder-grid {
+    grid-template-columns: 1fr;
+  }
+  .builder-grid article,
+  .builder-grid article:first-child,
+  .builder-grid article:last-child {
+    padding: 25px 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .builder-grid h3 {
+    font-size: 32px;
+  }
+  .elsewhere-links {
+    grid-template-columns: 1fr;
+  }
+  .work-external-link {
+    margin-left: 0;
+    display: flex;
+    width: fit-content;
+  }
+  .builder-section h2 {
+    font-size: clamp(36px, 7vw, 60px);
+    line-height: 1.2;
+  }
+}

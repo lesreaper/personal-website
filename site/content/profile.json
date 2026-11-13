@@ -8,8 +8,8 @@
     "github": "https://github.com/lesreaper"
   },
   "bios": {
-    "short": "Richard Everts is an AI researcher, software engineer, filmmaker, and author exploring intelligence and human agency. He leads Deep SIML Labs and previously led technical development at Bestie Bot. His work spans simulation, applied AI, The United States of Autism, and the books On Terran Liberty and Light Up the Grind.",
-    "extended": "Richard Everts works across research, production engineering, and public storytelling. He has built software professionally since 2010, with experience in Python, full-stack applications, computer vision, retrieval systems, and agent orchestration. At Deep SIML Labs, his work investigates simulation, cognitive systems, and the relationship between models and the physical world. He also publishes as The Operator. At Bestie Bot, he combined engineering leadership with research into assistive technology and multimodal sensing, including a PennAITech-supported home-monitoring pilot. Beyond engineering, he directed, produced, and edited The United States of Autism, a documentary following families across America. His books explore personal fulfillment and political possibility. A philosophy graduate of Franklin & Marshall College, he brings questions about minds, agency, and lived experience into both technical and creative work."
+    "short": "Richard Everts is an AI researcher, software engineer, filmmaker, and author exploring intelligence and human agency. He leads Deep SIML Labs and previously led technical development at Bestie Bot. He created Psychic Unicorn AI, bringing conversational AI into a consumer product. His work spans simulation, applied AI, The United States of Autism, and the books On Terran Liberty and Light Up the Grind.",
+    "extended": "Richard Everts works across research, production engineering, and public storytelling. He has built software professionally since 2010, with experience in Python, full-stack applications, computer vision, retrieval systems, and agent orchestration. At Deep SIML Labs, his work investigates simulation, cognitive systems, and the relationship between models and the physical world. He also publishes as The Operator. At Bestie Bot, he combined engineering leadership with research into assistive technology and multimodal sensing, including a PennAITech-supported home-monitoring pilot. He created and developed Psychic Unicorn AI, launching its conversational birth-chart analysis beta in 2025. Beyond engineering, he directed, produced, and edited The United States of Autism, a documentary following families across America. His books explore personal fulfillment and political possibility. A philosophy graduate of Franklin & Marshall College, he brings questions about minds, agency, and lived experience into both technical and creative work."
   },
   "timeline": [
     {
@@ -41,6 +41,11 @@
       "year": "2024",
       "title": "The AIR Strategy Framework",
       "description": "A national-security paper centered on energy efficiency, essential resources, and embodiment."
+    },
+    {
+      "year": "2025",
+      "title": "Psychic Unicorn AI",
+      "description": "Created and launched a consumer AI product with birth-chart analysis and a conversational question interface."
     },
     {
       "year": "2025–present",
@@ -77,5 +82,36 @@
       "Robotics Software Engineer, Udacity (2019).",
       "Build a Modern Computer from First Principles, Coursera (2017)."
     ]
-  }
+  },
+  "operator": {
+    "name": "The Operator",
+    "person": "Richard Everts",
+    "work": "The SIML Codex",
+    "repository": "https://github.com/SIML-Life/siml-codex",
+    "readme": "https://github.com/SIML-Life/siml-codex/blob/main/README.md",
+    "byline": "Authored by: The Operator",
+    "context": "https://www.siml.life/about"
+  },
+  "externalLinks": [
+    {
+      "label": "Psychic Unicorn AI",
+      "url": "https://psychicunicorn.com",
+      "description": "Consumer AI product created and developed by Richard Everts."
+    },
+    {
+      "label": "Deep SIML Labs",
+      "url": "https://www.siml.life",
+      "description": "Richard’s independent research and engineering program."
+    },
+    {
+      "label": "SIML Codex on GitHub",
+      "url": "https://github.com/SIML-Life/siml-codex",
+      "description": "Original Codex repository credited to The Operator."
+    },
+    {
+      "label": "Deep SIML Labs code",
+      "url": "https://github.com/SIML-Life",
+      "description": "Public repositories, experiments, and releases."
+    }
+  ]
 }

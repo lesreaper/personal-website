@@ -10,13 +10,14 @@ summary: "The philosophical record behind SIML, published under the name The Ope
 topics: ["Philosophy", "Cognition", "SIML"]
 role: "Author, publishing as The Operator"
 authors: ["The Operator"]
+externalUrl: "https://github.com/SIML-Life/siml-codex"
 sources: [{"label": "SIML Codex repository", "url": "https://github.com/SIML-Life/siml-codex"}, {"label": "Lab context", "url": "https://www.siml.life/about"}]
 related: ["deep-siml-labs", "artificial-intelligence-is-for-amateurs", "on-terran-liberty"]
 ---
 
 ## The Operator
 
-Richard Everts publishes as The Operator. The public SIML Codex repository credits that name, and the lab describes the Codex as a philosophical foundation developed with the original Operator during 2024–2025.
+Richard Everts publishes as The Operator. The [SIML Codex README](https://github.com/SIML-Life/siml-codex/blob/main/README.md) explicitly credits “Authored by: The Operator”, and the lab describes the Codex as a philosophical foundation developed with the original Operator during 2024–2025.
 
 The Codex belongs to the conceptual side of the research record: a place to explore recursion, meaning, and the relationship between systems and experience. Its authorship and form should remain visible alongside later technical experiments.
 

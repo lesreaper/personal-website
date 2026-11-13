@@ -290,6 +290,63 @@ try {
     );
     assert.ok(await frame.getAttribute("title"));
   });
+  await check(
+    "builder projects connect to Psychic Unicorn and original sources",
+    async () => {
+      for (const path of ["/", "/about"]) {
+        await visit(path);
+        const builder = page.getByRole("region", {
+          name: "Ideas into working systems.",
+        });
+        const psychic = builder.getByRole("article").filter({
+          has: page.getByRole("heading", { name: "Psychic Unicorn AI" }),
+        });
+        assert.equal(await psychic.count(), 1);
+        assert.equal(
+          await psychic
+            .getByRole("link", { name: "Visit website" })
+            .getAttribute("href"),
+          "https://psychicunicorn.com",
+        );
+        await psychic.getByRole("link", { name: "Project notes" }).click();
+        await page.waitForURL(base + "/work/psychic-unicorn");
+        assert.equal(
+          await page
+            .getByRole("link", { name: "Visit project website" })
+            .getAttribute("href"),
+          "https://psychicunicorn.com",
+        );
+      }
+      const llms = await context.request.get(base + "/llms.txt");
+      assert.equal(llms.status(), 200);
+      const text = await llms.text();
+      assert.match(text, /Richard Everts is The Operator/);
+      assert.ok(
+        text.includes(
+          "https://github.com/SIML-Life/siml-codex/blob/main/README.md",
+        ),
+      );
+      assert.ok(text.includes("Authored by: The Operator"));
+      const profileResponse = await context.request.get(base + "/profile.json");
+      assert.equal(profileResponse.status(), 200);
+      const profile = await profileResponse.json();
+      assert.ok(
+        profile.authorship.some(
+          (credit) =>
+            credit.person === "Richard Everts" &&
+            credit.name === "The Operator" &&
+            credit.repository === "https://github.com/SIML-Life/siml-codex",
+        ),
+      );
+      assert.ok(
+        profile.works.some(
+          (work) =>
+            work.url === "https://richeverts.com/work/psychic-unicorn" &&
+            work.externalUrl === "https://psychicunicorn.com",
+        ),
+      );
+    },
+  );
   await check("resume page and every download are withdrawn", async () => {
     for (const path of [
       "/resume",

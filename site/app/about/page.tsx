@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
-import { bios, timeline, credentials, person, site } from "../../lib/profile";
+import {
+  bios,
+  timeline,
+  credentials,
+  person,
+  site,
+  operator,
+  externalLinks,
+} from "../../lib/profile";
 import Arrow from "../components/Arrow";
+import BuilderWork from "../components/BuilderWork";
 export const metadata: Metadata = {
   title: "About",
   description:
@@ -61,8 +70,19 @@ export default function About() {
           <a className="text-link" href="/research/siml-codex">
             The Operator & the SIML Codex <Arrow diagonal />
           </a>
+          <p>
+            <a
+              href={operator.repository}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Read the SIML Codex on GitHub
+            </a>
+            , whose README credits The Operator.
+          </p>
         </div>
       </section>
+      <BuilderWork />
       <section className="section timeline-section">
         <div className="section-heading">
           <div>
@@ -84,6 +104,28 @@ export default function About() {
                 <p>{item.description}</p>
               </div>
             </article>
+          ))}
+        </div>
+      </section>
+      <section className="section elsewhere-section">
+        <p className="eyebrow">Elsewhere</p>
+        <h2>
+          Follow <em>the work.</em>
+        </h2>
+        <div className="elsewhere-links">
+          {externalLinks.map((link) => (
+            <a
+              key={link.url}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>
+                {link.label}
+                <small>{link.description}</small>
+              </span>
+              <Arrow diagonal />
+            </a>
           ))}
         </div>
       </section>

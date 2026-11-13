@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getEntries } from "../lib/content";
 import Arrow from "./components/Arrow";
 import EntryCard from "./components/EntryCard";
+import BuilderWork from "./components/BuilderWork";
 export const metadata: Metadata = { alternates: { canonical: "/" } };
 const selected = [
   {
@@ -138,6 +139,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <BuilderWork />
       <section className="section research-section">
         <div className="section-heading">
           <div>

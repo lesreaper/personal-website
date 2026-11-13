@@ -76,6 +76,9 @@ export function getMarkdown(entry: Entry): string {
       `\n${entry.summary}`,
       `\nDate: ${entry.dateLabel}\nType: ${entry.kind}\nStatus: ${entry.status}\nCredit: ${entry.role}\nAuthors: ${entry.authors.join(", ")}`,
       `\n${entry.body}`,
+      ...(entry.externalUrl
+        ? [`\nOriginal site: [${entry.title}](${entry.externalUrl})`]
+        : []),
       "\n## Sources",
       ...entry.sources.map((source) => `- [${source.label}](${source.url})`),
     ].join("\n") + "\n"

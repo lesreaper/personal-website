@@ -128,6 +128,16 @@ export default async function CategoryPage({
                   <a href={toHref(entry)} className="text-link">
                     Explore the project <Arrow diagonal />
                   </a>
+                  {entry.externalUrl ? (
+                    <a
+                      className="text-link work-external-link"
+                      href={entry.externalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Visit project website <Arrow diagonal />
+                    </a>
+                  ) : null}
                 </div>
               </article>
             ))}

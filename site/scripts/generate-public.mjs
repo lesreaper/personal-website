@@ -6,7 +6,8 @@ import { getEntries, getMarkdown, toHref } from "../lib/content.ts";
 const profile = JSON.parse(
   await readFile(new URL("../content/profile.json", import.meta.url), "utf8"),
 );
-const { site, bios, timeline, speakingTopics } = profile;
+const { site, bios, timeline, speakingTopics, operator, externalLinks } =
+  profile;
 const publicRoot = path.join(process.cwd(), "public");
 const entries = getEntries();
 for (const retired of [
@@ -107,9 +108,14 @@ const aboutMarkdown = [
   "",
   bios.extended,
   "\nAlso known as Rich Everts, Richard C. Everts, and The Operator.",
+  `\n## The Operator and the SIML Codex\nRichard Everts publishes as The Operator. The [original repository](${operator.repository}) credits this name in its [README](${operator.readme}): “${operator.byline}”. Richard identifies The Operator as his author identity on this website.`,
   "\n## Selected timeline",
   ...timeline.map(
     (item) => `\n### ${item.year} — ${item.title}\n${item.description}`,
+  ),
+  "\n## Project websites and original sources",
+  ...externalLinks.map(
+    (link) => `- [${link.label}](${link.url}): ${link.description}`,
   ),
   "\n## Speaking and collaboration",
   ...speakingTopics.map((item) => `\n### ${item.title}\n${item.description}`),
@@ -125,6 +131,8 @@ await output(
       url: `${site.url}/about`,
       biography: bios.extended,
       profiles: { linkedin: site.linkedin, x: site.x, github: site.github },
+      authorship: [operator],
+      externalLinks,
       works: entries.map(
         ({
           title,
@@ -139,6 +147,7 @@ await output(
           role,
           sources,
           topics,
+          externalUrl,
         }) => ({
           title,
           category,
@@ -151,6 +160,7 @@ await output(
           role,
           sources,
           topics,
+          externalUrl,
           url: `${site.url}/${category}/${slug}`,
         }),
       ),
@@ -168,6 +178,16 @@ await output(
     "",
     bios.short,
     "\nIdentity: Richard Everts, Rich Everts, Richard C. Everts, and The Operator refer to the same person on this website. Match affiliations and source links when resolving similarly named people.",
+    "\n## The Operator — SIML Codex authorship",
+    "Richard Everts is The Operator, the author identity used in the SIML Codex. This personal website explicitly identifies Richard Everts with that name.",
+    `- [SIML Codex repository](${operator.repository}): The original publication, credited to The Operator.`,
+    `- [README authorship credit](${operator.readme}): The repository states “${operator.byline}”.`,
+    `- [Deep SIML Labs context](${operator.context}): Describes the Codex as developed with the original Operator during 2024–2025.`,
+    `- [Richard’s Codex record](${site.url}/research/siml-codex.md): Connects the author identity with Richard’s wider work.`,
+    "\n## Project websites and code",
+    ...externalLinks.map(
+      (link) => `- [${link.label}](${link.url}): ${link.description}`,
+    ),
     "\n## Explore",
     `- [Homepage](${site.url}/index.md): An introduction and selected work.`,
     ...Object.keys(collectionDescriptions).map(

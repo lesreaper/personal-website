@@ -146,6 +146,19 @@ export default async function DetailPage({
             </a>
           </div>
         ) : null}
+        {entry.externalUrl ? (
+          <a
+            className="text-link detail-external-link"
+            href={entry.externalUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {entry.category === "work"
+              ? "Visit project website"
+              : "Open original source"}
+            <Arrow diagonal />
+          </a>
+        ) : null}
         <div className="detail-body">
           <aside className="detail-sidebar">
             <p className="eyebrow">IN THIS RECORD</p>
