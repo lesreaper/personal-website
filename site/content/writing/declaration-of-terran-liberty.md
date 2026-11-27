@@ -13,12 +13,9 @@ authors: ["Richard Everts"]
 originalPublication:
   siteName: "TerranLiberty.org"
   url: "http://terranliberty.org/"
-  transcriptionNote: "Transcribed from the author’s archived copy captured June 23, 2017, with the 2012 capitalization of “Weak” in the opening restored by the author."
 sources:
-  - label: "Author’s archived text · June 23, 2017"
-    url: "https://web.archive.org/web/20170623234842/http://richardeverts.com/terranliberty/"
-  - label: "Original publication site · April 16, 2016 capture"
-    url: "https://web.archive.org/web/20160416032654/http://terranliberty.org/"
+  - label: "Richard Everts on the public release"
+    url: "https://richeverts.com/#declaration"
 featured: true
 related: ["on-terran-liberty", "siml-codex"]
 ---

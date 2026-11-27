@@ -27,7 +27,6 @@ export type Entry = {
   originalPublication?: {
     siteName: string;
     url: string;
-    transcriptionNote: string;
   };
   bookEdition?: { isbn: string; publisher: string; pages: number };
   body: string;
@@ -75,6 +74,11 @@ export function toHref(entry: Pick<Entry, "category" | "slug">): string {
   return `/${entry.category}/${entry.slug}`;
 }
 
+/** Display full publication dates in US order, retaining year-only precision. */
+export function formatNumericDate(date: string): string {
+  return date.replace(/^(\d{4})-(\d{2})-(\d{2})$/, "$2-$3-$1");
+}
+
 export function getMarkdown(entry: Entry): string {
   return (
     [
@@ -89,11 +93,6 @@ export function getMarkdown(entry: Entry): string {
           ]
         : []),
       `\n${entry.body}`,
-      ...(entry.originalPublication
-        ? [
-            `\n## Transcription\n\n${entry.originalPublication.transcriptionNote}`,
-          ]
-        : []),
       ...(entry.externalUrl
         ? [`\nOriginal site: [${entry.title}](${entry.externalUrl})`]
         : []),

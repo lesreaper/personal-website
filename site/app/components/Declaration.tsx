@@ -1,4 +1,4 @@
-import { toHref, type Entry } from "../../lib/content";
+import { formatNumericDate, toHref, type Entry } from "../../lib/content";
 import Arrow from "./Arrow";
 import "./declaration.css";
 
@@ -18,7 +18,7 @@ export default function Declaration({ entry }: { entry: Entry }) {
           ← Writing
         </a>
         <div className="document-dateline">
-          <time dateTime={entry.date}>21 · 12 · 2012</time>
+          <time dateTime={entry.date}>{formatNumericDate(entry.date)}</time>
           <span className="solstice-rule" aria-hidden="true" />
         </div>
         <h1>{entry.title}</h1>
@@ -55,26 +55,13 @@ export default function Declaration({ entry }: { entry: Entry }) {
             className="document-transcription"
             dangerouslySetInnerHTML={{ __html: transcription }}
           />
-          <section className="document-provenance">
-            <h2>About this transcription</h2>
-            <p>{publication.transcriptionNote}</p>
-            <ul>
-              {entry.sources.map((source) => (
-                <li key={source.url}>
-                  <a href={source.url}>
-                    {source.label} <Arrow diagonal />
-                  </a>
-                </li>
-              ))}
-            </ul>
-            <p>
-              Richard returned to these questions in the 2023 book{" "}
-              <a href="/writing/on-terran-liberty">
-                <i>On Terran Liberty: Volume 1</i>
-              </a>
-              .
-            </p>
-          </section>
+          <p className="document-related">
+            Richard returned to these questions in the 2023 book{" "}
+            <a href="/writing/on-terran-liberty">
+              <i>On Terran Liberty: Volume 1</i>
+            </a>
+            .
+          </p>
         </div>
       </div>
     </article>

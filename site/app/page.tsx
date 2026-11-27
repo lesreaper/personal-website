@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Chronology from "./components/Chronology";
 import ReadingLink from "./components/ReadingLink";
+import { formatNumericDate } from "../lib/content";
 import { operator, site } from "../lib/profile";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/", types: { "text/markdown": "/index.md" } },
 };
+const declarationDate = "2012-12-21";
 const declaration = "/writing/declaration-of-terran-liberty";
 
 export default function Home() {
@@ -53,14 +55,14 @@ export default function Home() {
           <div className="solstice-sun" />
           <div className="solstice-inscription">
             <span>December solstice</span>
-            <b>21 · 12</b>
-            <i>·</i>
-            <b>2012</b>
+            <time dateTime={declarationDate}>
+              {formatNumericDate(declarationDate)}
+            </time>
           </div>
         </div>
         <div className="solstice-text">
           <p className="arc-kicker">
-            <time dateTime="2012-12-21">December 21, 2012</time>
+            <time dateTime={declarationDate}>December 21, 2012</time>
           </p>
           <h2 id="declaration-heading">
             The Day the World Was Supposed to End,{" "}

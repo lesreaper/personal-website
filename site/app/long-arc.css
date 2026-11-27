@@ -165,15 +165,11 @@
   display: block;
   margin-bottom: 20px;
 }
-.solstice-inscription b {
-  font: 400 clamp(64px, 7.3vw, 124px)/0.96 var(--serif);
+.solstice-inscription time {
   display: block;
-  letter-spacing: -0.06em;
-}
-.solstice-inscription i {
-  display: block;
-  color: var(--accent);
-  font: 400 34px/0.8 var(--serif);
+  font: 400 clamp(38px, 5.2vw, 84px)/1 var(--serif);
+  letter-spacing: -0.045em;
+  white-space: nowrap;
 }
 .solstice-text {
   padding: clamp(46px, 5.4vw, 88px) var(--arc-inset);
@@ -441,13 +437,8 @@
   .solstice-inscription span {
     margin-bottom: 12px;
   }
-  .solstice-inscription b,
-  .solstice-inscription i {
-    display: inline;
-    font-size: clamp(36px, 9vw, 58px);
-  }
-  .solstice-inscription i {
-    padding-inline: 6px;
+  .solstice-inscription time {
+    font-size: clamp(38px, 9vw, 58px);
   }
   .solstice-orbit {
     width: 73%;

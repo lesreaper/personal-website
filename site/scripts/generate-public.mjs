@@ -2,7 +2,12 @@ import { mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 import matter from "gray-matter";
-import { getEntries, getMarkdown, toHref } from "../lib/content.ts";
+import {
+  formatNumericDate,
+  getEntries,
+  getMarkdown,
+  toHref,
+} from "../lib/content.ts";
 
 const profile = JSON.parse(
   await readFile(new URL("../content/profile.json", import.meta.url), "utf8"),
@@ -352,7 +357,7 @@ const declarationCard = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" he
   <circle cx="835" cy="320" r="7" fill="#d7a35d"/>
   <g font-family="Georgia,serif" fill="#f4ebdc">
     <text x="72" y="101" font-size="28" letter-spacing="3">RICHARD EVERTS</text>
-    <text x="70" y="267" font-size="72" fill="#d7a35d">21 · 12 · 2012</text>
+    <text x="70" y="267" font-size="72" fill="#d7a35d">${formatNumericDate(declaration.date)}</text>
     <text x="68" y="377" font-size="55">${escapeXml(declaration.title)}</text>
   </g>
   <path d="M72 456H1128" stroke="#697d70"/>
