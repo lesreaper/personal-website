@@ -443,6 +443,7 @@ try {
         `Expected complete archive, got ${routes.length}`,
       );
       const problems = [];
+      await page.setViewportSize({ width: 320, height: 780 });
       for (const path of routes) {
         try {
           await visit(path);
@@ -456,6 +457,7 @@ try {
           problems.push(`${path}: ${error.message}`);
         }
       }
+      await page.setViewportSize({ width: 390, height: 844 });
       assert.deepEqual(problems, []);
       results.push({
         name: "sitemap route count",
