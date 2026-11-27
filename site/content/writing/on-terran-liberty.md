@@ -17,6 +17,8 @@ bookEdition:
 sources:
   - label: "Publisher’s edition · BookBaby"
     url: "https://store.bookbaby.com/book/on-terran-liberty"
+  - label: "Kindle edition on Amazon"
+    url: "https://www.amazon.com/dp/B0BR8G65B1"
   - label: "2023 paperback publication record"
     url: "https://www.readings.com.au/product/9781667880983/on-terran-liberty--richard-c-everts--2023--9781667880983"
   - label: "Connection to the AIR Strategy Framework"
