@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { getEntries, toHref } from "../../lib/content";
 import Archive from "../components/Archive";
 import Arrow from "../components/Arrow";
+import styles from "../components/NarrativePage.module.css";
+import NarrativePage, { pageMetadata } from "../components/NarrativePage";
 import ProjectVisual from "../components/ProjectVisual";
 import { speakingTopics, bios } from "../../lib/profile";
 const categories = {
@@ -30,7 +32,7 @@ const categories = {
       </>
     ),
     description:
-      "Research labs, production systems, consumer AI, and a film across America. Different forms of the same practice: asking a question, then building a way to explore it.",
+      "Making a film meant listening across a country. At Bestie Bot, listening meant building sensors and understanding what they could miss. These projects show the work I took on, the people I worked with, and what we made.",
   },
   writing: {
     label: "Writing",
@@ -56,7 +58,7 @@ const categories = {
       </>
     ),
     description:
-      "A growing collection of talks on intelligence, cognitive systems, engineering, and the human questions beneath the technology.",
+      "I started explaining computer vision at community meetups in Lancaster. The conversation grew to include simulated worlds, the limits of language models, and what a mind can afford to remember. The recordings and event records follow that progression.",
   },
 };
 export function generateStaticParams() {
@@ -71,10 +73,14 @@ export async function generateMetadata({
   const { category } = await params;
   const data = categories[category as keyof typeof categories];
   if (!data) return {};
+  if (category === "research") return pageMetadata("research");
   return {
     title: data.label,
     description: data.description,
-    alternates: { canonical: `/${category}` },
+    alternates: {
+      canonical: `/${category}`,
+      types: { "text/markdown": `/${category}.md` },
+    },
     openGraph: {
       title: `${data.label} — Richard Everts`,
       description: data.description,
@@ -94,21 +100,55 @@ export default async function CategoryPage({
   const entries = getEntries(key);
   return (
     <>
-      <section className={`page-intro intro-${key}`}>
-        <p className="eyebrow">
-          <span className="status-dot" />
-          {data.eyebrow}
-        </p>
-        <h1>{data.title}</h1>
-        <p>{data.description}</p>
-        <div className="intro-rule">
-          <span>
-            {String(entries.length).padStart(2, "0")} RECORDS IN THE COLLECTION
-          </span>
-          <span>RICHARD EVERTS</span>
-        </div>
-      </section>
+      {key === "research" ? (
+        <NarrativePage name="research" />
+      ) : (
+        <section className={`page-intro intro-${key}`}>
+          <p className="eyebrow">
+            <span className="status-dot" />
+            {data.eyebrow}
+          </p>
+          <h1>{data.title}</h1>
+          <p>{data.description}</p>
+          <div className="intro-rule">
+            <span>
+              {String(entries.length).padStart(2, "0")} RECORDS IN THE
+              COLLECTION
+            </span>
+            <span>RICHARD EVERTS</span>
+          </div>
+          {key === "writing" && (
+            <div className={styles.feature}>
+              <p className="eyebrow">December 21, 2012</p>
+              <h2>
+                <a href="/writing/declaration-of-terran-liberty">
+                  Declaration of Terran Liberty
+                </a>
+              </h2>
+              <p>
+                I publicly released the declaration at TerranLiberty.org as the
+                world contemplated the end of an age. Eleven years later,{" "}
+                <em>On Terran Liberty</em> returned to its questions of consent,
+                authority, and a civilization reaching beyond Earth.
+              </p>
+              <a
+                className="text-link"
+                href="/writing/declaration-of-terran-liberty"
+              >
+                Read the declaration <Arrow diagonal />
+              </a>
+            </div>
+          )}
+        </section>
+      )}
       <section className="section archive-section">
+        {key === "research" && (
+          <div className="section-heading">
+            <h2>
+              Papers and <em>experiments.</em>
+            </h2>
+          </div>
+        )}
         {key === "work" ? (
           <div className="work-archive">
             {entries.map((entry, index) => (
@@ -144,54 +184,38 @@ export default async function CategoryPage({
           </div>
         ) : key === "writing" ? (
           <div className="writing-archive">
-            {entries.map((entry) => (
-              <article className="writing-row" key={entry.slug}>
-                <a
-                  href={toHref(entry)}
-                  className={`book-image ${entry.slug === "on-terran-liberty" ? "terran" : "grind"}`}
-                >
-                  <img
-                    src={`/images/${entry.slug}.webp`}
-                    alt={`${entry.title} book cover`}
-                  />
-                </a>
-                <div>
-                  <p className="eyebrow">
-                    {entry.kind} / {entry.dateLabel}
-                  </p>
-                  <h2>
-                    <a href={toHref(entry)}>{entry.title}</a>
-                  </h2>
-                  <p>{entry.summary}</p>
-                  <a className="text-link" href={toHref(entry)}>
-                    About the book <Arrow diagonal />
+            {entries
+              .filter((entry) => entry.kind === "Book")
+              .map((entry) => (
+                <article className="writing-row" key={entry.slug}>
+                  <a
+                    href={toHref(entry)}
+                    className={`book-image ${entry.slug === "on-terran-liberty" ? "terran" : "grind"}`}
+                  >
+                    <img
+                      src={`/images/${entry.slug}.webp`}
+                      alt={`${entry.title} book cover`}
+                    />
                   </a>
-                </div>
-              </article>
-            ))}
+                  <div>
+                    <p className="eyebrow">
+                      {entry.kind} / {entry.dateLabel}
+                    </p>
+                    <h2>
+                      <a href={toHref(entry)}>{entry.title}</a>
+                    </h2>
+                    <p>{entry.summary}</p>
+                    <a className="text-link" href={toHref(entry)}>
+                      About the book <Arrow diagonal />
+                    </a>
+                  </div>
+                </article>
+              ))}
           </div>
         ) : (
           <Archive entries={entries} label={data.label} />
         )}
       </section>
-      {key === "research" ? (
-        <section className="section editorial-note">
-          <p className="eyebrow">ABOUT THE COLLECTION</p>
-          <h2>
-            A record that
-            <br />
-            <em>keeps its context.</em>
-          </h2>
-          <p>
-            Research changes. Each record preserves its source, date, credits,
-            and publication status. Historical work stays visible alongside
-            current investigations, with the distinction made explicit.
-          </p>
-          <a className="text-link" href="/research/siml-codex">
-            Richard Everts, publishing as The Operator <Arrow diagonal />
-          </a>
-        </section>
-      ) : null}
       {key === "speaking" ? (
         <section className="section speaking-kit" id="speaker-kit">
           <div className="section-heading">
@@ -201,7 +225,7 @@ export default async function CategoryPage({
                 Speaking & <em>collaboration.</em>
               </h2>
             </div>
-            <a className="text-link" href="/about#connect">
+            <a className="text-link" href="/contact">
               Discuss an invitation <Arrow diagonal />
             </a>
           </div>

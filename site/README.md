@@ -51,7 +51,7 @@ Write the body here with substantive context and precise attribution.
 
 Optional fields are `featured` (boolean), `related` (an array of existing slugs), `externalUrl`, `cover` (an existing public image path), and `videoId` (a verified eleven-character YouTube ID). A slug must be unique across the full archive. Keep slugs stable after publication; if one must change, add a permanent redirect at the hosting layer.
 
-The content loader and release verifier check the fields, links, original sources, publication metadata, Markdown alternatives, and JSON-LD. Topic filters and search are generated from these same records. Homepage selections are curated by slug in `app/page.tsx`; archive records also retain a `featured` field for future editorial use.
+The content loader and release verifier check the fields, links, original sources, publication metadata, Markdown alternatives, and JSON-LD. Topic filters and search are generated from these same records. The full chronology and homepage milestones use the ordered timeline in `content/profile.json`. Landing pages share source prose in `content/pages/` with their Markdown editions.
 
 ## Sources and identity
 
@@ -73,7 +73,7 @@ The original resume in the workspace's ignored `docs/` folder is private source 
 
 `scripts/generate-public.mjs` runs before the framework build. It generates:
 
-- Markdown alternatives for every work and collection, plus `/index.md`, `/about.md`, .
+- Markdown alternatives for every work and collection, plus the homepage, canonical biography, timeline, archive, film, contact, and current priorities.
 - `/llms.txt` and `/profile.json` from the same records as the website.
 - `/sitemap.xml`, `/feed.xml`, and `/robots.txt`.
 - `/social.svg`, and a 1200 × 630 `/social.png` sharing image suitable for Open Graph previews.

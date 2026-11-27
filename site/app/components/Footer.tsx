@@ -5,18 +5,12 @@ export default function Footer() {
     <footer className="footer" id="connect">
       <div className="footer-main">
         <div>
-          <p className="eyebrow">
-            <span className="status-dot" /> OPEN TO INTERESTING CONVERSATIONS
-          </p>
+          <p className="eyebrow">Connect</p>
           <h2>
-            Let’s ask
-            <br />
-            <em>better questions.</em>
+            Get in <em>touch.</em>
           </h2>
           <p className="footer-description">
-            Research collaborations. Speaking engagements.
-            <br />
-            Ambitious things worth building.
+            For research correspondence, speaking, and collaborations.
           </p>
         </div>
         <div className="contact-links">
@@ -26,14 +20,25 @@ export default function Footer() {
           <a href={site.x} target="_blank" rel="noopener noreferrer">
             Follow the conversation on X <Arrow diagonal />
           </a>
-          <a href="/about">
-            About Richard <Arrow />
+          <a href="/contact">
+            Contact and publications <Arrow />
           </a>
         </div>
       </div>
+      <nav className="arc-footer-nav" aria-label="Explore the site">
+        <a href="/timeline">Timeline</a>
+        <a href="/research">Research</a>
+        <a href="/work">Projects</a>
+        <a href="/writing">Writing</a>
+        <a href="/film">Film</a>
+        <a href="/speaking">Talks</a>
+        <a href="/archive">Codex archive</a>
+        <a href="/now">Now</a>
+        <a href="/about">Biography</a>
+      </nav>
       <div className="footer-bottom">
         <a href="/" className="footer-name">
-          Richard Everts<span>Researcher. Builder. Human.</span>
+          Richard Everts<span>The Long Arc</span>
         </a>
         <p>© {new Date().getUTCFullYear()} Richard Everts</p>
         <div>

@@ -7,8 +7,10 @@ import {
   statSync,
 } from "node:fs";
 import path from "node:path";
+import { createHash } from "node:crypto";
 import { getEntries, toHref } from "../lib/content.ts";
 import sharp from "sharp";
+import { marked } from "marked";
 import { resolveFile } from "./serve.mjs";
 
 const root = path.resolve(process.cwd(), "dist/client");
@@ -74,6 +76,11 @@ const routes = [
   "/writing",
   "/speaking",
   "/about",
+  "/timeline",
+  "/film",
+  "/archive",
+  "/now",
+  "/contact",
   ...entries.map(toHref),
 ];
 function resolveRoute(route) {
@@ -87,6 +94,9 @@ function resolveRoute(route) {
     (candidate) => existsSync(candidate) && statSync(candidate).isFile(),
   );
 }
+const declarationRoute = "/writing/declaration-of-terran-liberty";
+const bookRoute = "/writing/on-terran-liberty";
+const jsonLd = new Map();
 for (const route of routes) {
   const file = resolveRoute(route);
   check(Boolean(file), `Missing rendered page: ${route}`);
@@ -124,10 +134,79 @@ for (const route of routes) {
   check(structured.length > 0, `${route}: structured data missing`);
   for (const [, json] of structured) {
     try {
-      JSON.parse(json);
+      const parsed = JSON.parse(json);
+      jsonLd.set(route, [
+        ...(jsonLd.get(route) ?? []),
+        ...(parsed["@graph"] ?? [parsed]),
+      ]);
     } catch {
       issues.push(`${route}: invalid JSON-LD`);
     }
+  }
+}
+
+const personId = origin + "/#person";
+const person = jsonLd.get("/about")?.find((node) => node["@id"] === personId);
+check(
+  person?.["@type"] === "Person" &&
+    person.name === profile.site.name &&
+    person.url === origin + "/about",
+  "Canonical Person biography missing",
+);
+for (const entry of entries) {
+  const route = toHref(entry);
+  const work = jsonLd
+    .get(route)
+    ?.find((node) => node["@id"] === origin + route + "#work");
+  check(
+    work?.datePublished === entry.date && work?.url === origin + route,
+    route + ": work URL or date mismatch",
+  );
+  check(
+    entry.sources.every(({ url }) => work?.citation?.includes(url)),
+    route + ": missing original-source citation",
+  );
+  if (entry.kind === "Book")
+    check(work?.["@type"] === "Book", route + ": Book metadata missing");
+  if (entry.category === "research")
+    check(
+      ["ScholarlyArticle", "CreativeWork"].includes(work?.["@type"]),
+      route + ": research type missing",
+    );
+  if (entry.bookEdition)
+    check(
+      work?.isbn === entry.bookEdition.isbn,
+      route + ": edition ISBN missing",
+    );
+  if (entry.slug === "the-united-states-of-autism")
+    check(
+      work?.["@type"] === "Movie" && work.director?.["@id"] === personId,
+      route + ": director attribution missing",
+    );
+  if (entry.originalPublication) {
+    // Owner-approved transcription, ignoring layout whitespace.
+    const fingerprint = createHash("sha256")
+      .update(entry.body.replace(/\s+/g, " ").trim())
+      .digest("hex");
+    check(
+      fingerprint ===
+        "886fd32a05a6ecdc89318aed7afb78b0dd28af45c4eb7a12c8f573144c458edf",
+      route + ": declaration has diverged from the approved text",
+    );
+    check(
+      work?.["@type"] === "CreativeWork" &&
+        work.author?.some((author) => author["@id"] === personId),
+      route + ": author attribution missing",
+    );
+    check(
+      work?.publication?.startDate === "2012-12-21" &&
+        work?.publication?.location?.url === entry.originalPublication.url,
+      route + ": public-release event missing",
+    );
+    check(
+      work?.subjectOf?.["@id"] === origin + bookRoute + "#work",
+      route + ": book relationship missing",
+    );
   }
 }
 
@@ -204,10 +283,17 @@ for (const entry of entries) {
 const parsedDocuments = new Map(
   htmlFiles.map((file) => [file, readFileSync(file, "utf8")]),
 );
-for (const [file, html] of parsedDocuments) {
+const markdownDocuments = files
+  .filter((file) => file.endsWith(".md"))
+  .map((file) => [
+    file,
+    marked.parse(readFileSync(file, "utf8"), { async: false }),
+  ]);
+for (const [file, html] of [...parsedDocuments, ...markdownDocuments]) {
   const relative = path.relative(root, file);
-  const sourceRoute =
-    relative === "index.html"
+  const sourceRoute = relative.endsWith(".md")
+    ? "/" + relative
+    : relative === "index.html"
       ? "/"
       : relative.endsWith("/index.html")
         ? `/${relative.slice(0, -11)}`
@@ -249,9 +335,17 @@ for (const [file, html] of parsedDocuments) {
 for (const file of files) {
   const extension = path.extname(file);
   if (
-    [".html", ".md", ".json", ".txt", ".xml", ".js", ".css", ".svg"].includes(
-      extension,
-    )
+    [
+      ".html",
+      ".md",
+      ".json",
+      ".txt",
+      ".xml",
+      ".js",
+      ".css",
+      ".svg",
+      ".rsc",
+    ].includes(extension)
   )
     privacy(
       readFileSync(file, "utf8"),
@@ -289,6 +383,12 @@ for (const required of [
   "writing.md",
   "speaking.md",
   "about.md",
+  "archive.md",
+  "film.md",
+  "now.md",
+  "timeline.md",
+  "contact.md",
+  "declaration-social.png",
   "sitemap.xml",
   "feed.xml",
   "robots.txt",
@@ -299,17 +399,45 @@ for (const required of [
     existsSync(path.join(root, required)),
     `Missing publishing artifact: ${required}`,
   );
-const socialPng = path.join(root, "social.png");
-if (existsSync(socialPng)) {
+for (const name of ["social.png", "declaration-social.png"]) {
+  const socialPng = path.join(root, name);
+  if (!existsSync(socialPng)) continue;
   try {
     const image = await sharp(socialPng).metadata();
     check(
       image.format === "png" && image.width === 1200 && image.height === 630,
-      "Social PNG must be a valid 1200 × 630 image",
+      name + " must be a valid 1200 × 630 image",
     );
   } catch {
-    issues.push("Social PNG cannot be decoded");
+    issues.push(name + " cannot be decoded");
   }
+}
+const sitemap = readFileSync(path.join(root, "sitemap.xml"), "utf8");
+const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(
+  (match) => new URL(match[1]),
+);
+check(
+  urls.length === routes.length && urls.every((url) => url.origin === origin),
+  "Sitemap count or canonical origin mismatch",
+);
+for (const route of routes)
+  check(
+    urls.some((url) => url.pathname === route),
+    "Missing sitemap route: " + route,
+  );
+for (const file of [
+  "llms.txt",
+  "about.md",
+  "index.md",
+  "writing/declaration-of-terran-liberty.md",
+]) {
+  const content = readFileSync(path.join(root, file), "utf8");
+  check(
+    content.includes("December 21, 2012") &&
+      /publicly released/i.test(content) &&
+      content.includes("TerranLiberty.org"),
+    file + ": declaration publication fact missing",
+  );
 }
 const profileFile = path.join(root, "profile.json");
 if (existsSync(profileFile)) {
@@ -317,6 +445,22 @@ if (existsSync(profileFile)) {
   check(
     publicProfile.works.length === entries.length,
     "Public profile work index is out of sync",
+  );
+  const record = publicProfile.works.find(
+    (entry) => entry.url === origin + declarationRoute,
+  );
+  check(
+    record?.originalPublication?.releaseDate === "2012-12-21" &&
+      record?.originalPublication?.siteName === "TerranLiberty.org",
+    "Structured profile release provenance missing",
+  );
+  check(
+    record?.relatedWorks?.includes(origin + bookRoute),
+    "Structured profile book relationship missing",
+  );
+  check(
+    publicProfile.timeline?.length === profile.timeline.length,
+    "Public chronology is out of sync",
   );
   check(
     publicProfile.alternateNames.includes("The Operator"),

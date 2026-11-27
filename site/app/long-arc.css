@@ -1,0 +1,484 @@
+/* Long-form editorial pages share the existing type and color tokens. */
+:root {
+  --arc-inset: clamp(24px, 5.8vw, 92px);
+  --arc-paper: #ece6d8;
+  --arc-ink: #242a23;
+}
+.long-arc {
+  overflow: clip;
+}
+.arc-section,
+.arc-hero,
+.solstice-feature {
+  max-width: 1600px;
+  margin-inline: auto;
+}
+.arc-section {
+  padding: clamp(62px, 7.4vw, 118px) var(--arc-inset);
+}
+.arc-kicker,
+.solstice-inscription span {
+  font: 500 11px/1.6 var(--mono);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.arc-kicker {
+  color: #c4ad87;
+}
+.arc-kicker span {
+  margin-inline: 0.45em;
+  color: #82988b;
+}
+.arc-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #171916;
+  padding: clamp(48px, 6vw, 92px) var(--arc-inset) clamp(60px, 7vw, 100px);
+}
+.arc-sculpture {
+  position: absolute;
+  z-index: -2;
+  inset: 0 0 0 auto;
+  width: 80%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 65% 52%;
+  mask-image: linear-gradient(90deg, transparent, #000 33%);
+}
+.arc-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    90deg,
+    #171916 0%,
+    #171916ef 29%,
+    #171916c7 48%,
+    #17191680 62%,
+    transparent 83%
+  );
+}
+.arc-hero h1 {
+  margin-top: 27px;
+  font-size: clamp(50px, 5.65vw, 92px);
+  line-height: 1.08;
+  letter-spacing: -0.054em;
+}
+.arc-hero-copy {
+  position: relative;
+}
+.arc-roles {
+  margin-block: 26px 10px;
+  font-size: clamp(17px, 1.5vw, 22px);
+  color: #e2dece;
+}
+.reading-link,
+.arc-source {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+  text-decoration-color: #aa895a;
+  font: 500 16px/1.6 var(--sans);
+  padding: 5px 0;
+}
+.reading-link:hover,
+.arc-source:hover {
+  text-decoration-color: currentColor;
+}
+.reading-link .arrow,
+.arc-source .arrow {
+  width: 18px;
+  height: 18px;
+}
+.arc-hero .reading-link {
+  color: #ead4b2;
+  margin-top: 8px;
+}
+.solstice-feature {
+  display: grid;
+  grid-template-columns: 0.84fr 1.16fr;
+  background: var(--arc-paper);
+  color: var(--arc-ink);
+}
+.solstice-feature a:focus-visible,
+.arc-works a:focus-visible {
+  outline-color: #84521e;
+}
+.solstice-plate {
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 3% 73%, #3a4538, transparent 50%), #1a2622;
+  color: #ebdfc9;
+  border: 1px solid #5b6052;
+}
+.solstice-orbit,
+.solstice-plate::before,
+.solstice-plate::after {
+  content: "";
+  position: absolute;
+  width: 106%;
+  aspect-ratio: 1;
+  border: 1px solid #b1ac8d45;
+  border-radius: 50%;
+  z-index: -1;
+}
+.solstice-plate::before {
+  width: 144%;
+}
+.solstice-plate::after {
+  width: 86%;
+  border-color: #c0ab794d;
+}
+.solstice-axis {
+  position: absolute;
+  width: 150%;
+  border-top: 1px solid #c0a97d73;
+  transform: rotate(-23.4deg);
+  z-index: -1;
+}
+.solstice-sun {
+  position: absolute;
+  left: 28%;
+  top: 13%;
+  width: 9px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #e3b471;
+  box-shadow: 0 0 29px 6px #d5a55944;
+}
+.solstice-inscription {
+  text-align: center;
+  padding: 48px 0;
+}
+.solstice-inscription span {
+  color: #d0c29f;
+  display: block;
+  margin-bottom: 20px;
+}
+.solstice-inscription b {
+  font: 400 clamp(64px, 7.3vw, 124px)/0.96 var(--serif);
+  display: block;
+  letter-spacing: -0.06em;
+}
+.solstice-inscription i {
+  display: block;
+  color: var(--accent);
+  font: 400 34px/0.8 var(--serif);
+}
+.solstice-text {
+  padding: clamp(46px, 5.4vw, 88px) var(--arc-inset);
+}
+.solstice-text h2 {
+  font-size: clamp(36px, 3.35vw, 61px);
+  line-height: 1.1;
+  margin: 18px 0 26px;
+  text-wrap: pretty;
+}
+.solstice-text h2 em,
+.arc-works h2 em {
+  color: #705531;
+}
+.solstice-text .arc-kicker,
+.arc-works .arc-kicker {
+  color: #605138;
+}
+.solstice-text .arc-prose p,
+.arc-codex .arc-prose p {
+  margin-bottom: 13px;
+}
+.arc-prose,
+.arc-side > p:not(.arc-kicker),
+.arc-lab-main > p:not(.arc-kicker),
+.arc-lab-result div > p:not(.arc-kicker),
+.arc-pair article > p:not(.arc-kicker),
+.arc-work-thread,
+.arc-future > p:not(.arc-kicker) {
+  font-size: clamp(17px, 1.28vw, 20px);
+  line-height: 1.62;
+}
+.solstice-text .arc-prose em {
+  color: inherit;
+}
+.arc-history {
+  display: grid;
+  grid-template-columns: minmax(0, 0.76fr) minmax(0, 1.24fr);
+  gap: clamp(38px, 7vw, 115px);
+}
+.arc-side {
+  align-self: start;
+}
+.arc-side h2,
+.arc-side h1,
+.arc-lab h2,
+.arc-works h2,
+.arc-codex h2,
+.arc-future h2 {
+  margin: 18px 0 23px;
+  font-size: clamp(48px, 4.7vw, 78px);
+  line-height: 1.09;
+  letter-spacing: -0.045em;
+}
+.arc-side > p:not(.arc-kicker) {
+  color: var(--muted);
+  max-width: 32ch;
+}
+.arc-side .reading-link {
+  margin-top: 18px;
+}
+.arc-chronology {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.arc-chronology li {
+  display: grid;
+  grid-template-columns: 95px 1fr;
+  gap: 12px;
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+}
+.arc-year {
+  font: 400 15px/1.8 var(--mono);
+  color: #d4af7f;
+}
+.arc-chronology h3,
+.arc-lab-result h3,
+.arc-pair h3 {
+  font: 400 clamp(25px, 2.16vw, 36px)/1.17 var(--serif);
+  letter-spacing: -0.025em;
+}
+.arc-chronology p {
+  font-size: 16px;
+  line-height: 1.65;
+  margin: 10px 0 5px;
+  color: #c2c4b8;
+}
+.arc-source {
+  font-size: 14px;
+}
+.arc-full-history h1 {
+  font-size: clamp(53px, 5.8vw, 96px);
+}
+.arc-lab {
+  background: #26342e;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: clamp(44px, 8vw, 130px);
+  border-top: 1px solid #637563;
+}
+.arc-lab-main > p:not(.arc-kicker) {
+  max-width: 56ch;
+  color: #d7d9cb;
+}
+.arc-lab-main > p.arc-deck {
+  font: 400 clamp(24px, 2.35vw, 39px)/1.29 var(--serif);
+  color: var(--text);
+  margin-bottom: 20px;
+}
+.arc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 26px;
+  margin-top: 20px;
+}
+.arc-lab-result {
+  background: #1d2722;
+  border: 1px solid #647061;
+}
+.arc-lab-result img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2.5;
+  object-fit: cover;
+}
+.arc-lab-result > div {
+  padding: clamp(23px, 2.6vw, 43px);
+}
+.arc-lab-result h3 {
+  margin: 13px 0;
+}
+.arc-lab-result p:not(.arc-kicker) {
+  color: #d1d4c7;
+}
+.arc-lab-result .reading-link {
+  margin-top: 11px;
+}
+.arc-works {
+  background: var(--arc-paper);
+  color: var(--arc-ink);
+}
+.arc-pair {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: clamp(34px, 7vw, 114px);
+  margin-top: 38px;
+}
+.arc-pair .arc-kicker {
+  margin: 20px 0 10px;
+}
+.arc-pair article > p:not(.arc-kicker) {
+  margin-block: 12px;
+  max-width: 53ch;
+}
+.arc-film-image,
+.arc-book-image {
+  display: grid;
+  place-items: center;
+  height: clamp(200px, 21vw, 335px);
+  background: #dcd6c7;
+}
+.arc-film-image {
+  background: #171916;
+}
+.arc-film-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.arc-book-image img {
+  width: auto;
+  height: 89%;
+  max-height: 280px;
+  box-shadow: 4px 5px 12px #342e2842;
+}
+.arc-work-thread {
+  border-top: 1px solid #252b2340;
+  padding-top: 26px;
+  margin-top: 40px;
+}
+.arc-work-thread a,
+.arc-bio a:not(.reading-link) {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.arc-codex {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 7vw;
+}
+.arc-codex .arc-prose {
+  color: #d8dbcf;
+}
+.arc-future {
+  border-top: 1px solid var(--line);
+  background: radial-gradient(ellipse at 85% 110%, #34463a, #1c221e 63%);
+}
+.arc-future > p:not(.arc-kicker) {
+  max-width: 60ch;
+}
+.arc-footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  padding: 26px 0;
+  border-top: 1px solid var(--line);
+}
+.arc-footer-nav a:hover {
+  text-decoration: underline;
+}
+.arc-bio p {
+  margin: 16px 0;
+}
+@media (min-width: 960px) {
+  .arc-side {
+    position: sticky;
+    top: 36px;
+  }
+}
+@media (max-width: 760px) {
+  .arc-history,
+  .arc-lab,
+  .arc-pair,
+  .arc-codex {
+    grid-template-columns: 1fr;
+  }
+  .arc-hero {
+    padding-top: 38px;
+    padding-bottom: 140px;
+  }
+  .arc-sculpture {
+    height: 70%;
+    width: 100%;
+    inset: auto -12% 0 auto;
+    opacity: 0.72;
+  }
+  .arc-hero::before {
+    background: linear-gradient(
+      164deg,
+      #171916 13%,
+      #171916dd 50%,
+      #17191688 70%,
+      transparent 91%
+    );
+  }
+  .arc-hero h1 {
+    font-size: clamp(39px, 7.7vw, 58px);
+  }
+  .arc-roles {
+    font-size: 16px;
+  }
+  .solstice-feature {
+    grid-template-columns: 1fr;
+  }
+  .solstice-plate {
+    min-height: 168px;
+  }
+  .solstice-inscription {
+    padding: 24px 0;
+  }
+  .solstice-inscription span {
+    margin-bottom: 12px;
+  }
+  .solstice-inscription b,
+  .solstice-inscription i {
+    display: inline;
+    font-size: clamp(36px, 9vw, 58px);
+  }
+  .solstice-inscription i {
+    padding-inline: 6px;
+  }
+  .solstice-orbit {
+    width: 73%;
+  }
+  .solstice-plate::after {
+    width: 53%;
+  }
+  .solstice-axis {
+    transform: rotate(-8deg);
+  }
+  .arc-chronology li {
+    grid-template-columns: minmax(63px, 18%) 1fr;
+  }
+  .arc-year {
+    font-size: 12px;
+  }
+  .arc-lab-main > p.arc-deck {
+    font-size: 28px;
+  }
+  .arc-future h2 {
+    font-size: clamp(40px, 9vw, 58px);
+  }
+  .arc-film-image,
+  .arc-book-image {
+    height: auto;
+    aspect-ratio: 1.95;
+  }
+  .arc-book-image {
+    position: relative;
+  }
+  .arc-book-image img {
+    position: absolute;
+  }
+}

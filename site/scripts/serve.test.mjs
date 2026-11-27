@@ -44,6 +44,13 @@ test("development is excluded from indexing; production remains crawlable", asyn
       assert.match(result.headers.get("x-robots-tag"), /noindex/);
       assert.ok(!(await result.text()).startsWith("%PDF"));
     }
+    for (const alias of ["/talks", "/talks/"]) {
+      const response = await fetch(origin + alias + "?from=archive", {
+        redirect: "manual",
+      });
+      assert.equal(response.status, 308);
+      assert.equal(response.headers.get("location"), "/speaking?from=archive");
+    }
     const head = await fetch(origin + "/Richard-Everts-Resume.pdf", {
       method: "HEAD",
     });
@@ -72,4 +79,66 @@ test("development is excluded from indexing; production remains crawlable", asyn
     server.closeAllConnections();
     await new Promise((resolve) => server.close(resolve));
   }
+});
+
+test("a reader can reconstruct the public record by following llms.txt links over HTTP", async (t) => {
+  const server = createStaticServer();
+  server.listen(0, "127.0.0.1");
+  await once(server, "listening");
+  const origin = "http://127.0.0.1:" + server.address().port;
+  t.after(() => {
+    server.closeAllConnections();
+    return new Promise((resolve) => server.close(resolve));
+  });
+  const index = await fetch(origin + "/llms.txt");
+  assert.equal(index.status, 200);
+  const contents = await index.text();
+  const urls = [
+    ...contents.matchAll(/\]\((https:\/\/richeverts\.com\/[^\s)]+)\)/g),
+  ].map((match) => new URL(match[1]).pathname);
+  async function readLinked(path) {
+    assert.ok(urls.includes(path), "Missing discovery link " + path);
+    const response = await fetch(origin + path);
+    assert.equal(response.status, 200, path);
+    return response.text();
+  }
+  const declaration = await readLinked(
+    "/writing/declaration-of-terran-liberty.md",
+  );
+  assert.match(
+    declaration,
+    /Publicly released December 21, 2012, at TerranLiberty\.org/,
+  );
+  assert.match(declaration, /Authors: Richard Everts/);
+  const research = await readLinked("/research.md");
+  assert.match(research, /RTX 3060/);
+  assert.match(research, /12\.08/);
+  assert.match(research, /0\.871/);
+  assert.match(research, /peer review/i);
+  const study = await readLinked("/research/gpu-lattice-updates.md");
+  assert.match(
+    study,
+    /https:\/\/www\.siml\.life\/research\/siml-gpu-capability/,
+  );
+  const psychic = await readLinked("/work/psychic-unicorn.md");
+  assert.match(psychic, /Credit: Founder and lead AI engineer/);
+  assert.match(psychic, /https:\/\/psychicunicorn\.com/);
+  const archive = await readLinked("/archive.md");
+  const harmonics = [
+    ...archive.matchAll(
+      /^\d+\. \[[^\]]+\]\((https:\/\/github\.com\/SIML-Life\/siml-codex\/blob\/[a-f0-9]+\/_Primary_Codex\/[^)]+)\)/gm,
+    ),
+  ];
+  assert.equal(new Set(harmonics.map((match) => match[1])).size, 12);
+  assert.match(archive, /Myth_Prompt\.md/);
+  assert.match(contents, /Authored by: The Operator/);
+  const profile = JSON.parse(await readLinked("/profile.json"));
+  assert.ok(
+    profile.authorship.some(
+      (record) =>
+        record.name === "The Operator" &&
+        record.person === "Richard Everts" &&
+        record.repository === "https://github.com/SIML-Life/siml-codex",
+    ),
+  );
 });

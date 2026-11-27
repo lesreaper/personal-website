@@ -9,14 +9,14 @@ status: "Historical"
 summary: "The original lab launch, retained as a record of how the research direction began and changed."
 topics: ["SIML", "Research history"]
 role: "Founder and publisher"
-authors: ["Deep SIML Labs"]
+authors: ["Richard Everts"]
 sources: [{"label": "Launch note", "url": "https://www.siml.life/notes/Launch-Deep-SIML-Labs"}, {"label": "Historical context", "url": "https://www.siml.life/archive"}]
 related: ["deep-siml-labs", "artificial-intelligence-is-for-amateurs"]
 ---
 
 ## The first public direction
 
-The original Deep SIML Labs launch introduced a program focused on emergent intelligence and artificial life. It brought the early SIML work into a public research identity.
+Richard signed the June 1, 2025 launch note as founder of Deep SIML Labs. The announcement introduced a program focused on emergent intelligence and artificial life. It brought the early SIML work into a public research identity.
 
 The lab now retains this announcement as historical material. Its current direction emphasizes simulation, optimization, scientific discovery, and future connections with physical systems and materials.
 

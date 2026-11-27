@@ -4,6 +4,7 @@ import http from "node:http";
 import { chromium } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
+const declarationPath = "/writing/declaration-of-terran-liberty";
 const base = process.env.TEST_BASE_URL ?? "http://127.0.0.1:4173";
 const localChrome = "/tmp/uat-chrome/chrome-linux64/chrome";
 const executablePath =
@@ -138,7 +139,7 @@ try {
       await visit("/");
       assert.equal(await page.locator("h1").count(), 1);
       assert.match(await page.locator("main").innerText(), /Richard\s+Everts/i);
-      for (const label of ["Work", "Ideas", "About", "Speaking"])
+      for (const label of ["Timeline", "Research", "Writing", "About"])
         assert.equal(
           await page
             .getByRole("navigation", { name: "Main navigation" })
@@ -194,32 +195,39 @@ try {
     assert.ok(page.url().endsWith("#main"));
   });
   await check(
-    "approved hero, five branches, and selected-work navigation",
+    "the homepage leads through the original declaration and its seven addressable articles",
     async () => {
       await visit("/");
+      const headline = await page.locator("h1").innerText();
       assert.match(
-        await page.locator("h1").innerText(),
-        /Exploring minds.\s+Building futures./,
+        headline,
+        /Engineering intelligence\.\s*Exploring life\.\s*Questioning the future\./,
       );
-      assert.deepEqual(
-        await page.locator(".selected-project h3").allTextContents(),
-        [
-          "Deep SIML Labs",
-          "Bestie Bot",
-          "Books",
-          "The United States of Autism",
-          "AI Talks & Leadership",
-        ],
+      await page.locator('main a[href="#declaration"]').click();
+      assert.equal(new URL(page.url()).hash, "#declaration");
+      const feature = page.locator("#declaration");
+      assert.match(
+        await feature.innerText(),
+        /publicly released the Declaration of Terran Liberty at TerranLiberty.org/,
       );
-      assert.equal(
-        await page.locator(".living-sculpture").getAttribute("alt"),
-        "",
-      );
-      await page
-        .getByRole("link", { name: "Explore the work", exact: true })
+      assert.match(await feature.innerText(), /synchronicity/i);
+      await feature
+        .getByRole("link", { name: /original declaration/i })
         .click();
-      assert.ok(page.url().endsWith("#selected-work"));
-      assert.equal(await page.locator("canvas").count(), 0);
+      await page.waitForURL(base + declarationPath);
+      assert.equal(await page.locator('ol > li[id^="article-"]').count(), 7);
+      for (let index = 1; index <= 7; index++) {
+        await page
+          .getByRole("link", { name: "Article " + index, exact: true })
+          .click();
+        assert.equal(new URL(page.url()).hash, "#article-" + index);
+      }
+      const social = page.locator('meta[property="og:image"]');
+      assert.ok(
+        (await social.getAttribute("content")).endsWith(
+          "/declaration-social.png",
+        ),
+      );
     },
   );
   await check(
@@ -295,20 +303,10 @@ try {
     async () => {
       for (const path of ["/", "/about"]) {
         await visit(path);
-        const builder = page.getByRole("region", {
-          name: "Ideas into working systems.",
-        });
-        const psychic = builder.getByRole("article").filter({
-          has: page.getByRole("heading", { name: "Psychic Unicorn AI" }),
-        });
-        assert.equal(await psychic.count(), 1);
-        assert.equal(
-          await psychic
-            .getByRole("link", { name: "Visit website" })
-            .getAttribute("href"),
-          "https://psychicunicorn.com",
-        );
-        await psychic.getByRole("link", { name: "Project notes" }).click();
+        const projectLink = page
+          .locator('main a[href="/work/psychic-unicorn"]')
+          .first();
+        await projectLink.click();
         await page.waitForURL(base + "/work/psychic-unicorn");
         assert.equal(
           await page
@@ -388,6 +386,13 @@ try {
         ["/speaking", "speaking-desktop"],
         ["/work/the-united-states-of-autism", "film-desktop"],
         ["/writing/on-terran-liberty", "book-desktop"],
+        ["/writing", "writing-desktop"],
+        [declarationPath, "declaration-desktop"],
+        ["/timeline", "timeline-desktop"],
+        ["/archive", "archive-desktop"],
+        ["/now", "now-desktop"],
+        ["/film", "film-page-desktop"],
+        ["/contact", "contact-desktop"],
       ]) {
         await visit(path);
         await axe(path, name);
@@ -416,7 +421,7 @@ try {
     await page.getByRole("button", { name: "Menu" }).click();
     await page
       .getByRole("navigation", { name: "Main navigation" })
-      .getByRole("link", { name: "Ideas", exact: true })
+      .getByRole("link", { name: "Research", exact: true })
       .click();
     await page.waitForURL(base + "/research");
     assert.equal(
@@ -459,31 +464,40 @@ try {
       });
     },
   );
-  await check("mobile home, archive, and about remain accessible", async () => {
-    for (const [path, name] of [
-      ["/", "home-mobile"],
-      ["/about", "about-mobile"],
-      ["/research", "research-mobile"],
-    ]) {
-      await visit(path);
-      await axe(path, name);
-      await loadImages();
-      await page.screenshot({
-        path: `outputs/${name}.png`,
-        fullPage: true,
-        animations: "disabled",
-      });
-    }
-  });
+  await check(
+    "mobile biography, declaration, and collections remain accessible",
+    async () => {
+      for (const [path, name] of [
+        ["/", "home-mobile"],
+        ["/about", "about-mobile"],
+        ["/research", "research-mobile"],
+        [declarationPath, "declaration-mobile"],
+        ["/timeline", "timeline-mobile"],
+        ["/film", "film-mobile"],
+        ["/archive", "archive-mobile"],
+        ["/now", "now-mobile"],
+        ["/contact", "contact-mobile"],
+      ]) {
+        await visit(path);
+        await axe(path, name);
+        await loadImages();
+        await page.screenshot({
+          path: `outputs/${name}.png`,
+          fullPage: true,
+          animations: "disabled",
+        });
+      }
+    },
+  );
   await check(
     "approved artwork retains its identity with reduced motion",
     async () => {
       await page.emulateMedia({ reducedMotion: "reduce" });
       await visit("/");
-      assert.ok(await page.locator(".living-sculpture").isVisible());
+      assert.ok(await page.locator(".arc-sculpture").isVisible());
       assert.ok(
         await page
-          .locator(".living-sculpture")
+          .locator(".arc-sculpture")
           .evaluate((image) => image.complete && image.naturalWidth > 0),
       );
       assert.equal(await page.locator("canvas").count(), 0);
@@ -504,6 +518,17 @@ try {
       );
       await staticPage.goto(base + "/research");
       assert.ok((await staticPage.locator(".entry-card h3 a").count()) > 3);
+      await staticPage.goto(base + declarationPath + "#article-7");
+      assert.equal(
+        await staticPage.locator(".document-transcription ol > li").count(),
+        7,
+      );
+      assert.match(
+        await staticPage.locator(".document-transcription").innerText(),
+        /December 21st, 2012/,
+      );
+      await staticPage.goto(base + "/archive");
+      assert.match(await staticPage.locator("main").innerText(), /Myth Audit/i);
       await noJs.close();
     },
   );
@@ -537,6 +562,9 @@ try {
       );
       assert.equal(legacy.status, 308);
       assert.equal(legacy.headers.location, "/speaking?from=old");
+      const talks = await rawRequest("/talks?from=book");
+      assert.equal(talks.status, 308);
+      assert.equal(talks.headers.location, "/speaking?from=book");
     },
   );
   await check("no browser JavaScript errors during visitor flows", async () =>

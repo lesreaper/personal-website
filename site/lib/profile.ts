@@ -30,6 +30,36 @@ export const person = {
     "@type": "CollegeOrUniversity",
     name: "Franklin & Marshall College",
   },
+  subjectOf: [
+    {
+      "@type": "ProfilePage",
+      "@id": site.url + "/about",
+      url: site.url + "/about",
+    },
+  ],
+  hasOccupation: [
+    { "@type": "Occupation", name: "Researcher and AI engineer" },
+    { "@type": "Occupation", name: "Filmmaker" },
+    { "@type": "Occupation", name: "Author" },
+  ],
+  worksFor: [
+    {
+      "@type": "Organization",
+      name: "Deep SIML Labs",
+      url: "https://www.siml.life",
+      founder: { "@id": site.url + "/#person" },
+    },
+    {
+      "@type": "EmployeeRole",
+      roleName: "Founder and lead AI engineer",
+      worksFor: {
+        "@type": "Organization",
+        name: "Psychic Unicorn",
+        url: "https://psychicunicorn.com",
+        founder: { "@id": site.url + "/#person" },
+      },
+    },
+  ],
   affiliation: {
     "@type": "Organization",
     name: "Deep SIML Labs",

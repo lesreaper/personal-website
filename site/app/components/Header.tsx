@@ -1,12 +1,11 @@
 "use client";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import Arrow from "./Arrow";
 const links = [
-  ["Work", "/work"],
-  ["Ideas", "/research"],
+  ["Timeline", "/timeline"],
+  ["Research", "/research"],
+  ["Writing", "/writing"],
   ["About", "/about"],
-  ["Speaking", "/speaking"],
 ];
 export default function Header() {
   const [open, setOpen] = useState(false);

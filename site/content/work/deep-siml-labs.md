@@ -24,10 +24,10 @@ Richard leads the engineering and research program and publishes its work. His e
 
 ## A research record that can change
 
-Current work includes dynamic causal geometry, latent planning experiments, and the Stardate SIML prototype. Earlier artificial-life framing and the EranaOS exploration remain accessible with historical or archived status.
+Current work includes informational geometry, GPU studies of compressed representations, functional biological models, and the SIML Studio representation beta. The lab reports separate measurements for cellular-model capacity and binary-lattice update rates. Physical evaluation of alternative substrates is a later milestone. [Research and results](/research) · [Current priorities](/now) Earlier artificial-life framing and the EranaOS exploration remain accessible with historical or archived status.
 
 That distinction matters: the archive is a record of questions and results over time. A prototype, a philosophical text, and a technical preprint each have a different role in the work.
 
 ## The Operator
 
-Richard is also The Operator, the name attached to the SIML Codex. The Codex provides a philosophical thread; the technical publications retain their own bylines and evidence standards.
+Richard also publishes as the Operator, the byline on the *Codex of the Twelve Harmonics*. [Read the Operator/Solace archive](/archive). The Codex provides a philosophical thread; the technical publications retain their own bylines and evidence standards.

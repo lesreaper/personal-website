@@ -1,41 +1,26 @@
 import type { Metadata } from "next";
-import {
-  bios,
-  timeline,
-  credentials,
-  person,
-  site,
-  operator,
-  externalLinks,
-} from "../../lib/profile";
-import Arrow from "../components/Arrow";
-import BuilderWork from "../components/BuilderWork";
+import { bios, credentials, person, site } from "../../lib/profile";
+import ReadingLink from "../components/ReadingLink";
+
 export const metadata: Metadata = {
-  title: "About",
-  description:
-    "Richard Everts is an AI researcher, engineer, filmmaker, and author. Explore his background, career, and work connecting intelligence with human agency.",
-  alternates: { canonical: "/about" },
+  title: "Richard Everts — Biography",
+  description: bios.short,
+  alternates: { canonical: "/about", types: { "text/markdown": "/about.md" } },
 };
+
 export default function About() {
   return (
     <>
       <section className="page-intro about-intro">
         <div>
-          <p className="eyebrow">
-            <span className="status-dot" /> THE PERSON BEHIND THE WORK
-          </p>
+          <p className="arc-kicker">Biography</p>
           <h1>
-            Always
+            Richard
             <br />
-            <em>curious.</em>
+            <em>Everts</em>
           </h1>
-          <p>
-            Researcher. Engineer. Filmmaker. Author.
-            <br />A few ways of asking what comes next.
-          </p>
-          <a className="text-link" href="/work">
-            Explore my work <Arrow diagonal />
-          </a>
+          <p>Researcher. AI Engineer. Filmmaker. Author.</p>
+          <ReadingLink href="/timeline">Follow the timeline</ReadingLink>
         </div>
         <figure className="portrait">
           <img
@@ -44,99 +29,43 @@ export default function About() {
             width="460"
             height="460"
           />
-          <figcaption>RICHARD EVERTS / ALSO KNOWN AS THE OPERATOR</figcaption>
         </figure>
       </section>
-      <section className="section about-story">
-        <p className="section-number">A CONNECTED PRACTICE</p>
+      <section className="section about-story arc-bio">
+        <p className="arc-kicker">Liberty, life, intelligence, continuity</p>
         <div className="prose">
           <h2>
-            Intelligence is a technical question.
-            <br />
-            <em>And a human one.</em>
+            A life in <em>questions.</em>
           </h2>
           <p>{bios.extended}</p>
+          <ReadingLink href="/writing/declaration-of-terran-liberty">
+            Read the 2012 declaration
+          </ReadingLink>
+          <h3>Listening and building</h3>
+          <p>{bios.engineering}</p>
           <p>
-            The thread running through this work is human agency: how people
-            understand the world, how systems can help, and where the decisions
-            still belong to us. An engineering project, a film, and a book can
-            be different ways of investigating that same thread.
+            His <a href="/film">documentary work</a>,{" "}
+            <a href="/work/bestie-bot">Bestie Bot</a>, and{" "}
+            <a href="/work/psychic-unicorn">Psychic Unicorn</a> all put him in
+            contact with how differently people interpret the same information.
+          </p>
+          <h3>Deep SIML Labs</h3>
+          <p>{bios.research}</p>
+          <p>
+            Follow the <a href="/research">published research</a> or explore the{" "}
+            <a href="/archive">Codex archive</a>, including the original essays
+            and the Myth Audit.
           </p>
           <p>
-            I publish as Richard Everts, Rich Everts, Richard C. Everts, and The
-            Operator. This site brings that record together, with links to the
-            original work and the people involved.
+            Richard Everts, Rich Everts, Richard C. Everts, and The Operator are
+            the names used in his public work.
           </p>
-          <a className="text-link" href="/research/siml-codex">
-            The Operator & the SIML Codex <Arrow diagonal />
-          </a>
-          <p>
-            <a
-              href={operator.repository}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Read the SIML Codex on GitHub
-            </a>
-            , whose README credits The Operator.
-          </p>
-        </div>
-      </section>
-      <BuilderWork />
-      <section className="section timeline-section">
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">HOW THE THREAD UNFOLDED</p>
-            <h2>
-              A continuing <em>exploration.</em>
-            </h2>
-          </div>
-          <a className="text-link" href="/work">
-            Selected projects <Arrow diagonal />
-          </a>
-        </div>
-        <div className="timeline">
-          {timeline.map((item) => (
-            <article key={`${item.year}-${item.title}`}>
-              <span>{item.year}</span>
-              <div>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-      <section className="section elsewhere-section">
-        <p className="eyebrow">Elsewhere</p>
-        <h2>
-          Follow <em>the work.</em>
-        </h2>
-        <div className="elsewhere-links">
-          {externalLinks.map((link) => (
-            <a
-              key={link.url}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span>
-                {link.label}
-                <small>{link.description}</small>
-              </span>
-              <Arrow diagonal />
-            </a>
-          ))}
         </div>
       </section>
       <section className="section credentials">
         <div>
-          <p className="eyebrow">FOUNDATIONS</p>
-          <h2>
-            Thinking deeply.
-            <br />
-            <em>Building practically.</em>
-          </h2>
+          <p className="arc-kicker">Education and professional record</p>
+          <h2>Foundations</h2>
         </div>
         <div>
           {credentials.education.map((item) => (
@@ -147,16 +76,14 @@ export default function About() {
             </article>
           ))}
           <article>
-            <h3>Research, invention & recognition</h3>
+            <h3>Research, invention, and recognition</h3>
             <ul>
               {credentials.recognition.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
           </article>
-          <a className="text-link" href="/work">
-            Explore the work <Arrow diagonal />
-          </a>
+          <ReadingLink href="/work">Explore the projects</ReadingLink>
         </div>
       </section>
       <script
@@ -165,9 +92,9 @@ export default function About() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ProfilePage",
-            url: `${site.url}/about`,
+            url: site.url + "/about",
             mainEntity: person,
-          }).replace(/</g, "\u003c"),
+          }).replace(/</g, "\\u003c"),
         }}
       />
     </>

@@ -2,55 +2,129 @@
   "site": {
     "url": "https://richeverts.com",
     "name": "Richard Everts",
-    "description": "Research, engineering, film, and writing at the intersection of intelligence and human agency. The collected work of Richard Everts.",
+    "description": "The life and work of Richard Everts, from the public Declaration of Terran Liberty in 2012 to documentary film, books, and the embodied intelligence research of Deep SIML Labs.",
     "linkedin": "https://www.linkedin.com/in/richeverts",
     "x": "https://x.com/rich_everts",
     "github": "https://github.com/lesreaper"
   },
   "bios": {
-    "short": "Richard Everts is an AI researcher, software engineer, filmmaker, and author exploring intelligence and human agency. He leads Deep SIML Labs and previously led technical development at Bestie Bot. He created Psychic Unicorn AI, bringing conversational AI into a consumer product. His work spans simulation, applied AI, The United States of Autism, and the books On Terran Liberty and Light Up the Grind.",
-    "extended": "Richard Everts works across research, production engineering, and public storytelling. He has built software professionally since 2010, with experience in Python, full-stack applications, computer vision, retrieval systems, and agent orchestration. At Deep SIML Labs, his work investigates simulation, cognitive systems, and the relationship between models and the physical world. He also publishes as The Operator. At Bestie Bot, he combined engineering leadership with research into assistive technology and multimodal sensing, including a PennAITech-supported home-monitoring pilot. He created and developed Psychic Unicorn AI, launching its conversational birth-chart analysis beta in 2025. Beyond engineering, he directed, produced, and edited The United States of Autism, a documentary following families across America. His books explore personal fulfillment and political possibility. A philosophy graduate of Franklin & Marshall College, he brings questions about minds, agency, and lived experience into both technical and creative work."
+    "short": "Richard Everts is a researcher, AI engineer, filmmaker, and author. He publicly released the Declaration of Terran Liberty on December 21, 2012, at TerranLiberty.org. He founded Deep SIML Labs, where he studies how embodied systems learn, remember, and make predictions with limited resources.",
+    "extended": "Richard Everts studied philosophy at Franklin & Marshall College and has built software professionally since 2010. On December 21, 2012, he publicly released the Declaration of Terran Liberty at TerranLiberty.org. It asked what obligations people might carry toward other life and what liberty might mean for a civilization extending beyond Earth. In 2013, his documentary The United States of Autism brought the voices of families across America to the screen. A decade later, writing as Richard C. Everts, he returned to questions of political authority and consent in On Terran Liberty: Volume 1.",
+    "engineering": "At Bestie Bot, Richard led engineering on systems that combined depth and thermal sensing to help people age at home. As founder and lead AI engineer at Psychic Unicorn, he brought conversational AI to a consumer application for personal reflection. He also shared the practical foundations of computer vision and neural networks through public talks.",
+    "research": "Richard began SIML research in 2024. In 2025 he published the Codex of the Twelve Harmonics as The Operator and announced Deep SIML Labs. He now leads the lab’s program in embodied cognition, efficient computation, and the geometry of information. His work moves between a philosophical question about intelligence and an engineering question he can test in a particular model."
   },
   "timeline": [
     {
       "year": "2010",
       "title": "Building production software",
-      "description": "Independent full-stack engineering, followed by enterprise applications and applied AI systems."
+      "description": "Independent software work led to enterprise applications, applied AI, and systems that had to work outside a demonstration.",
+      "href": "/work/eranaos",
+      "label": "Engineering work",
+      "featured": false
+    },
+    {
+      "year": "2012",
+      "title": "Liberty and civilization",
+      "description": "On December 21, I publicly released the Declaration of Terran Liberty at TerranLiberty.org. I wanted to ask what a civilization owed to other life, and what freedom could mean beyond Earth.",
+      "href": "/writing/declaration-of-terran-liberty",
+      "label": "Read the declaration",
+      "featured": true
     },
     {
       "year": "2013",
-      "title": "The United States of Autism",
-      "description": "A documentary journey across America, directed, produced, and edited by Richard Everts."
+      "title": "Humanity through a camera",
+      "description": "An 11,000-mile journey became The United States of Autism. Families spoke about daily life in their own communities. My work as director and editor was to listen, and to decide how those voices would share a screen.",
+      "href": "/film",
+      "label": "Explore the film",
+      "featured": true
     },
     {
       "year": "2018",
-      "title": "Sharing AI in public",
-      "description": "Lancaster AI talks and community learning, followed by conference sessions on intelligence and its implications."
+      "title": "Teaching AI in public",
+      "description": "At Lancaster AI, people gathered to work through the building blocks of machine learning together. Those sessions grew into a public record of talks and demonstrations.",
+      "href": "/speaking",
+      "label": "Talks and recordings",
+      "featured": false
     },
     {
       "year": "2020–2024",
-      "title": "Bestie Bot",
-      "description": "Technical leadership at the intersection of assistive technology, computer vision, and AI."
+      "title": "Sensing the home",
+      "description": "At Bestie Bot, I helped build technology for people aging at home. Thermal and depth sensors raised a practical question about how much a system needs to perceive to be useful.",
+      "href": "/work/bestie-bot",
+      "label": "Bestie Bot",
+      "featured": false
     },
     {
-      "year": "2022–2023",
-      "title": "Two books, wider questions",
-      "description": "Light Up the Grind and On Terran Liberty: Volume 1 connect personal experience with questions of freedom and possibility."
+      "year": "2022",
+      "title": "Light Up the Grind",
+      "description": "My first book asked how to find fulfillment in the work of an ordinary day.",
+      "href": "/writing/light-up-the-grind",
+      "label": "Read about the book",
+      "featured": false
+    },
+    {
+      "year": "2023",
+      "title": "On Terran Liberty",
+      "description": "Volume 1 gave the declaration’s political questions room to develop. What makes authority legitimate, and which principles of liberty could outlast the institutions that protect them?",
+      "href": "/writing/on-terran-liberty",
+      "label": "The published edition",
+      "featured": true
+    },
+    {
+      "year": "2024",
+      "title": "The search for new intelligence",
+      "description": "I began SIML with a question about a body in an environment. What must an agent remember to anticipate what happens next, and how much computation does that take?",
+      "href": "/research/siml-demo",
+      "label": "The early prototype",
+      "featured": true
     },
     {
       "year": "2024",
       "title": "The AIR Strategy Framework",
-      "description": "A national-security paper centered on energy efficiency, essential resources, and embodiment."
+      "description": "A paper on AI policy brought energy, essential resources, and embodiment into a discussion about national security.",
+      "href": "/research/ai-rollback-framework",
+      "label": "Read the paper record",
+      "featured": false
     },
     {
       "year": "2025",
-      "title": "Psychic Unicorn AI",
-      "description": "Created and launched a consumer AI product with birth-chart analysis and a conversational question interface."
+      "title": "Psychic Unicorn",
+      "description": "I founded Psychic Unicorn and serve as its lead AI engineer. The public beta paired birth-chart interpretation with a conversational interface for follow-up questions.",
+      "href": "/work/psychic-unicorn",
+      "label": "Psychic Unicorn",
+      "featured": false
     },
     {
-      "year": "2025–present",
-      "title": "Deep SIML Labs",
-      "description": "Independent research across simulation, cognitive systems, and scientific discovery; philosophical work also published as The Operator."
+      "year": "2025",
+      "title": "Recursion and the Codex",
+      "description": "Writing as The Operator, I published the Codex of the Twelve Harmonics. The essays and the later Myth Audit preserve two sides of a human–AI inquiry into how interpretations take shape and how to test them.",
+      "href": "/archive",
+      "label": "Enter the Codex archive",
+      "featured": true
+    },
+    {
+      "year": "2025",
+      "title": "Opening Deep SIML Labs",
+      "description": "I announced Deep SIML Labs on June 1. The lab gave the experiments a public home for prototypes, code, and research notes.",
+      "href": "/research/deep-siml-launch",
+      "label": "The launch announcement",
+      "featured": false
+    },
+    {
+      "year": "2026",
+      "title": "New computational frontiers",
+      "description": "At Deep SIML Labs, questions about learning now reach into memory layout, computational geometry, functional models of living systems, and possible physical substrates.",
+      "href": "/research",
+      "label": "Deep SIML research",
+      "featured": true
+    },
+    {
+      "year": "The future",
+      "title": "Unfinished",
+      "description": "The declaration was never intended to describe a final destination. It was a statement of beginnings. The work continues.",
+      "href": "/now",
+      "label": "What I am investigating",
+      "featured": true
     }
   ],
   "speakingTopics": [
@@ -86,7 +160,7 @@
   "operator": {
     "name": "The Operator",
     "person": "Richard Everts",
-    "work": "The SIML Codex",
+    "work": "Codex of the Twelve Harmonics",
     "repository": "https://github.com/SIML-Life/siml-codex",
     "readme": "https://github.com/SIML-Life/siml-codex/blob/main/README.md",
     "byline": "Authored by: The Operator",
@@ -94,14 +168,14 @@
   },
   "externalLinks": [
     {
-      "label": "Psychic Unicorn AI",
-      "url": "https://psychicunicorn.com",
-      "description": "Consumer AI product created and developed by Richard Everts."
-    },
-    {
       "label": "Deep SIML Labs",
       "url": "https://www.siml.life",
       "description": "Richard’s independent research and engineering program."
+    },
+    {
+      "label": "Deep SIML Labs code",
+      "url": "https://github.com/SIML-Life",
+      "description": "Public repositories, experiments, and releases."
     },
     {
       "label": "SIML Codex on GitHub",
@@ -109,9 +183,9 @@
       "description": "Original Codex repository credited to The Operator."
     },
     {
-      "label": "Deep SIML Labs code",
-      "url": "https://github.com/SIML-Life",
-      "description": "Public repositories, experiments, and releases."
+      "label": "Psychic Unicorn AI",
+      "url": "https://psychicunicorn.com",
+      "description": "Richard Everts founded Psychic Unicorn and serves as its lead AI engineer."
     }
   ]
 }

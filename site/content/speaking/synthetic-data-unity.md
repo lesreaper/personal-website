@@ -5,12 +5,13 @@ category: "speaking"
 kind: "Python Live session"
 date: "2023-07-21"
 dateLabel: "Python Live · July 21, 2023"
-status: "Event record"
+status: "Recorded talk"
 summary: "A practical session on synthetic data and Unity Perception."
 topics: ["Computer vision", "Synthetic data", "Applied AI"]
 role: "Speaker"
 authors: ["Richard Everts"]
-sources: [{"label": "Amicus event announcement", "url": "https://www.amicusjobs.com/events/python-live-unity-perception-for-dummies"}]
+videoId: "kGQQ398D49E"
+sources: [{"label": "Python Live recording published by Amicus Recruitment", "url": "https://www.youtube.com/watch?v=kGQQ398D49E"}]
 related: ["bestie-bot", "intro-computer-vision"]
 ---
 
@@ -18,4 +19,4 @@ related: ["bestie-bot", "intro-computer-vision"]
 
 Richard joined Python Live for a session on synthetic data and Unity Perception, hosted by Jordan Hayward. The event connects simulation tools with the practical work of building computer-vision systems.
 
-The organizer's indexed announcement records the title and July 21, 2023 date. Its current page may no longer provide a working player, so this entry links the event record without claiming that an on-site recording is available.
+Amicus Recruitment published the conversation in its Python Live series. Its recording preserves the discussion with Jordan Hayward and the practical context for the session.

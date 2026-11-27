@@ -3,14 +3,14 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { person, site } from "../lib/profile";
 import "./globals.css";
+import "./long-arc.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://richeverts.com"),
   title: {
-    default: "Richard Everts — Intelligence & Human Agency",
+    default: "Richard Everts — The Long Arc",
     template: "%s | Richard Everts",
   },
-  description:
-    "The connected work of Richard Everts: AI research, production systems, filmmaking, books, and public speaking. Founder of Deep SIML Labs. Publishing as The Operator.",
+  description: site.description,
   openGraph: {
     type: "website",
     siteName: "Richard Everts",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
         url: "/social.png",
         width: 1200,
         height: 630,
-        alt: "Richard Everts — Intelligence and Human Agency",
+        alt: "Richard Everts — The Long Arc",
       },
     ],
   },

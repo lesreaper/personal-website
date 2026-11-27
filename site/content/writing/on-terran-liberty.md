@@ -6,23 +6,31 @@ kind: "Book"
 date: "2023"
 dateLabel: "2023"
 status: "Published book"
-summary: "Political philosophy about liberty, consent, and humanity’s future beyond Earth."
-topics: ["Philosophy", "Human agency", "Political thought"]
+summary: "A decade after the Declaration of Terran Liberty, Richard returned to the question of government. Which limits on power would still matter if civilization extended beyond Earth?"
+topics: ["Liberty", "Human agency", "Political thought"]
 role: "Author"
 authors: ["Richard C. Everts"]
-sources: [{"label": "Published edition and ISBN", "url": "https://www.readings.com.au/product/9781667880983/on-terran-liberty--richard-c-everts--2023--9781667880983"}, {"label": "Connection to AIR Framework", "url": "https://docs.google.com/document/d/1BRWmdjvRxBlk4N7K_0s83GGuiY72v5KE8vdNKOIPamg/edit"}]
+bookEdition:
+  isbn: "9781667880983"
+  publisher: "BookBaby"
+  pages: 100
+sources:
+  - label: "Publisher’s edition · BookBaby"
+    url: "https://store.bookbaby.com/book/on-terran-liberty"
+  - label: "2023 paperback publication record"
+    url: "https://www.readings.com.au/product/9781667880983/on-terran-liberty--richard-c-everts--2023--9781667880983"
+  - label: "Connection to the AIR Strategy Framework"
+    url: "https://docs.google.com/document/d/1BRWmdjvRxBlk4N7K_0s83GGuiY72v5KE8vdNKOIPamg/edit"
 featured: true
-related: ["ai-rollback-framework", "stardate-siml", "siml-codex"]
+related: ["declaration-of-terran-liberty", "ai-rollback-framework", "stardate-siml"]
 ---
 
-## Liberty at a larger scale
+## From a declaration to a book
 
-On Terran Liberty extends Richard's interest in human agency into political philosophy. The series considers liberty, consensual government, and the question of how humanity might organize its future beyond Earth.
+I publicly released the [Declaration of Terran Liberty](/writing/declaration-of-terran-liberty) on December 21, 2012, at TerranLiberty.org. Its first article gave me a problem large enough for a book. If people create governments to secure their freedom, what keeps those governments from extinguishing it?
 
-Volume 1 is published under the name Richard C. Everts. The BookBaby paperback edition is recorded in 2023 with ISBN 9781667880983.
+In *On Terran Liberty*, I took the American political inheritance as a test case. Volume 1 asks which of its institutions have earned their authority, where they have failed, and which principles of liberty could travel with humanity beyond Earth. A change of planet would leave us with many of the same arguments about consent and power.
 
-## A continuing thread
+## The published edition
 
-The writing connects to the AIR Strategy Framework, which references the series in its discussion of technology and national security. Together, the works show the philosophical questions accompanying Richard's technical projects.
-
-Start with Volume 1 to explore the series' political and philosophical foundation. The linked edition record provides publication and purchase information.
+BookBaby published this 100-page first volume in 2023 under the name Richard C. Everts. The paperback ISBN is 9781667880983. The ebook ISBN is 9781667880990.

@@ -24,6 +24,12 @@ export type Entry = {
   related?: string[];
   externalUrl?: string;
   cover?: string;
+  originalPublication?: {
+    siteName: string;
+    url: string;
+    transcriptionNote: string;
+  };
+  bookEdition?: { isbn: string; publisher: string; pages: number };
   body: string;
   html: string;
 };
@@ -75,7 +81,19 @@ export function getMarkdown(entry: Entry): string {
       `# ${entry.title}`,
       `\n${entry.summary}`,
       `\nDate: ${entry.dateLabel}\nType: ${entry.kind}\nStatus: ${entry.status}\nCredit: ${entry.role}\nAuthors: ${entry.authors.join(", ")}`,
+      ...(entry.originalPublication
+        ? [
+            `\nPublicly released ${entry.dateLabel}, at ${entry.originalPublication.siteName}`,
+            `Current archival location: https://richeverts.com${toHref(entry)}`,
+            `Associated work: [On Terran Liberty: Volume 1](https://richeverts.com/writing/on-terran-liberty)`,
+          ]
+        : []),
       `\n${entry.body}`,
+      ...(entry.originalPublication
+        ? [
+            `\n## Transcription\n\n${entry.originalPublication.transcriptionNote}`,
+          ]
+        : []),
       ...(entry.externalUrl
         ? [`\nOriginal site: [${entry.title}](${entry.externalUrl})`]
         : []),

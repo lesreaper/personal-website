@@ -46,6 +46,8 @@ export function resolveFile(route, directory = root) {
   return resolved.startsWith(resolvedRoot + path.sep) ? candidate : null;
 }
 const legacy = {
+  "/talks": "/speaking",
+  "/talks/": "/speaking",
   "/february-and-march-lancaster-ai-meetup-fun": "/speaking",
   "/february-and-march-lancaster-ai-meetup-fun/": "/speaking",
 };
